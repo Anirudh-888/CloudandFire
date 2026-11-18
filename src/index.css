@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-obsidian: #000000;
+    --color-rednoir: #ef233c;
+    --color-rednoir-glow: rgba(239, 35, 60, 0.15);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+}
+
+/* Red Noir Grid Background */
+.red-noir-grid {
+  background-color: #000000;
+  background-image: 
+    linear-gradient(to right, rgba(239, 35, 60, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(239, 35, 60, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.red-noir-grid-dense {
+  background-image: 
+    linear-gradient(to right, rgba(239, 35, 60, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(239, 35, 60, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Glassmorphism Pill */
+.glass-pill {
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(239, 35, 60, 0.22);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-pill:hover {
+  border-color: rgba(239, 35, 60, 0.45);
+}
+
+/* Glowing Bento Card */
+.bento-card {
+  position: relative;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(20, 20, 20, 0.85) 0%, rgba(5, 5, 5, 0.95) 100%);
+  border: 2px solid rgba(239, 35, 60, 0.18);
+  border-radius: 1.5rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  border-color: #ef233c;
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px -5px rgba(239, 35, 60, 0.32), 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+}
+
+/* Red Noir Radial Glows */
+.radial-red-ambient {
+  background: radial-gradient(circle at 50% 30%, rgba(239, 35, 60, 0.12) 0%, rgba(239, 35, 60, 0.03) 45%, transparent 75%);
+}
+
+.radial-top-glow {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(239, 35, 60, 0.22), transparent 70%);
+}
+
+/* Kinetic Marquee */
+@keyframes kineticTicker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-kinetic-ticker {
+  display: flex;
+  width: max-content;
+  animation: kineticTicker 26s linear infinite;
+}
+
+.animate-kinetic-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ef233c;
+}
