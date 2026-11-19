@@ -124,9 +124,9 @@ export const Footer = ({ onOpenFounder }) => {
               <li className="p-2 sm:p-2.5 rounded-lg bg-zinc-950 border border-zinc-900 flex items-center justify-between min-w-0">
                 <div className="truncate mr-2">
                   <div className="text-white font-semibold truncate">EVNTPULSE</div>
-                  <div className="text-zinc-500 text-[10px] truncate">Real-Time Montage Engine (Node, Mongo)</div>
+                  <div className="text-zinc-500 text-[10px] truncate">Smart Campus Event Hub (React, FastAPI)</div>
                 </div>
-                <span className="text-amber-400 text-[10px] shrink-0">ACTIVE</span>
+                <span className="text-emerald-400 text-[10px] shrink-0">LIVE</span>
               </li>
             </ul>
           </div>

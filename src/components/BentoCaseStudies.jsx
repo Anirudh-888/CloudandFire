@@ -392,7 +392,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
           </div>
 
           {/* =========================================================================
-              CARD 3: EVNTPULSE (Full 12 cols) - Analytics & Event Montage Engine
+              CARD 3: EVNTPULSE (Full 12 cols) - Smart Campus Event Intelligence Hub
              ========================================================================= */}
           <div className="lg:col-span-12 bento-card p-4 sm:p-8 flex flex-col lg:flex-row gap-6 lg:gap-8 justify-between group min-w-0">
             
@@ -400,8 +400,8 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                    <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold tracking-wider uppercase bg-amber-500/20 text-amber-400 border border-amber-500/40">
-                      Telemetry & Media Pipeline
+                    <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold tracking-wider uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                      Campus Event OS
                     </span>
                     <div className="flex items-center gap-1.5">
                       {projects[2].tags.map(tag => (
@@ -412,14 +412,26 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                     </div>
                   </div>
 
-                  <button 
-                    onClick={() => onSelectProject(projects[2])}
-                    className="flex items-center gap-1 text-xs font-mono text-zinc-400 group-hover:text-rednoir transition-colors focus:outline-none"
-                    aria-label="Inspect EvntPulse Architecture"
-                  >
-                    <span className="hidden sm:inline">Inspect Architecture</span>
-                    <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-rednoir transition-all" />
-                  </button>
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <a 
+                      href={projects[2].liveUrl}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-mono text-emerald-400 hover:text-white transition-colors"
+                      aria-label="Open EvntPulse Live Deployment"
+                    >
+                      <span className="hidden sm:inline">Live Demo</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 transform hover:translate-x-0.5 hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                    <button 
+                      onClick={() => onSelectProject(projects[2])}
+                      className="flex items-center gap-1 text-xs font-mono text-zinc-400 group-hover:text-rednoir transition-colors focus:outline-none"
+                      aria-label="Inspect EvntPulse Architecture"
+                    >
+                      <span className="hidden sm:inline">Inspect Architecture</span>
+                      <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-rednoir transition-all" />
+                    </button>
+                  </div>
                 </div>
 
                 <h3 className="text-xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors break-words">
@@ -428,6 +440,26 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                 <p className="text-xs sm:text-sm font-mono text-rednoir uppercase tracking-wider mt-1">
                   {projects[2].tagline}
                 </p>
+
+                {/* Recognition Badge */}
+                <div className="mt-2.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono bg-amber-500/15 text-amber-400 border border-amber-500/30 max-w-full">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
+                  <span className="truncate">1st Place Winner (9 Teams) • MVJCE SDC Challenge</span>
+                </div>
+
+                {/* Live Deployment Link (safe for 360px mobile) */}
+                <div className="mt-2 flex items-center gap-2 max-w-full min-w-0">
+                  <span className="text-[10px] font-mono text-zinc-500 shrink-0">Live:</span>
+                  <a
+                    href={projects[2].liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-mono text-emerald-400 hover:text-white hover:underline transition-colors truncate max-w-full inline-flex items-center gap-1 min-w-0"
+                  >
+                    <span className="truncate">{projects[2].liveUrl}</span>
+                    <ArrowUpRight className="w-3 h-3 shrink-0" />
+                  </a>
+                </div>
 
                 <p className="mt-3 text-sm text-zinc-400 font-sans leading-relaxed">
                   {projects[2].description}
@@ -447,15 +479,15 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
               <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-zinc-900 grid grid-cols-3 gap-1.5 sm:gap-3 text-center">
                 <div className="p-1.5 sm:p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900 min-w-0">
                   <div className="text-xs sm:text-sm font-bold text-white font-mono tabular-nums truncate">{currentStage.throughput}</div>
-                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">Telemetry Rate</div>
+                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">{currentStage.metric1Label || "Scan Latency"}</div>
                 </div>
                 <div className="p-1.5 sm:p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900 min-w-0">
                   <div className="text-xs sm:text-sm font-bold text-white font-mono tabular-nums truncate">{currentStage.dataBitrate}</div>
-                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">Stream Bitrate</div>
+                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">{currentStage.metric2Label || "Gate Backend"}</div>
                 </div>
                 <div className="p-1.5 sm:p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900 min-w-0">
                   <div className="text-xs sm:text-sm font-bold text-white font-mono tabular-nums truncate">{currentStage.fps}</div>
-                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">Framerate Lock</div>
+                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">{currentStage.metric3Label || "Pass Integrity"}</div>
                 </div>
               </div>
             </div>
@@ -465,16 +497,16 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
               
               <div className="flex items-center justify-between pb-3 border-b border-zinc-800 text-xs font-mono text-zinc-400">
                 <div className="flex items-center gap-2 min-w-0">
-                  <Activity className="w-4 h-4 text-amber-400 animate-pulse shrink-0" />
-                  <span className="text-white font-semibold truncate">Automated Media Assembly Pipeline</span>
+                  <Activity className="w-4 h-4 text-emerald-400 animate-pulse shrink-0" />
+                  <span className="text-white font-semibold truncate">Campus Event Intelligence Engine</span>
                 </div>
                 <span className="text-[10px] text-emerald-400 font-mono tabular-nums shrink-0">{currentStage.queueDepth}</span>
               </div>
 
-              {/* 4 Pipeline Stages Selector (Requirement: Stage Capture, Grand Pulse, Speaker Clean-up, Closing Montage) */}
+              {/* 4 Pipeline Stages Selector (Requirement: QR Gate Scanner, Live Polling, Health Score, Campus Ecosystem) */}
               <div className="my-4 min-w-0">
                 <div className="text-[11px] font-mono text-zinc-400 mb-2.5 flex items-center justify-between">
-                  <span>SELECT PIPELINE STAGE:</span>
+                  <span>SELECT OPERATING MODULE:</span>
                   <span className="text-rednoir font-bold tabular-nums">{currentStage.gpuLoad}</span>
                 </div>
 

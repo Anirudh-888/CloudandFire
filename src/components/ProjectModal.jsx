@@ -32,6 +32,11 @@ export const ProjectModal = ({ project, onClose, onBookConsultation }) => {
             <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-zinc-900 text-zinc-400 border border-zinc-800">
               {project.status}
             </span>
+            {project.badge && (
+              <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                {project.badge}
+              </span>
+            )}
           </div>
 
           <h3 className="text-2xl sm:text-4xl font-bold text-white font-display tracking-tight">
@@ -40,6 +45,21 @@ export const ProjectModal = ({ project, onClose, onBookConsultation }) => {
           <p className="text-sm font-mono text-rednoir uppercase tracking-wider mt-1">
             {project.tagline}
           </p>
+
+          {project.liveUrl && (
+            <div className="mt-3 flex items-center gap-2 max-w-full min-w-0">
+              <span className="text-xs font-mono text-zinc-500 shrink-0">Live:</span>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-mono text-emerald-400 hover:text-white transition-colors underline underline-offset-4 max-w-full truncate inline-flex items-center gap-1 min-w-0"
+              >
+                <span className="truncate">{project.liveUrl}</span>
+                <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Detailed Description */}
