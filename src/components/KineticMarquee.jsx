@@ -13,13 +13,13 @@ export const KineticMarquee = () => {
   ];
 
   return (
-    <div className="relative py-12 sm:py-16 overflow-hidden bg-black border-y border-rednoir/30 select-none">
+    <div className="relative py-12 sm:py-16 overflow-hidden overflow-x-clip w-full max-w-full bg-black border-y border-rednoir/30 select-none">
       
       {/* Background ambient red glow */}
       <div className="absolute inset-0 bg-rednoir/[0.03] pointer-events-none" />
 
       {/* Skewed Kinetic Wrapper */}
-      <div className="relative transform -rotate-1 sm:-rotate-2 scale-105 overflow-hidden py-4 sm:py-5 bg-gradient-to-r from-noir-950 via-black to-noir-950 border-y-2 border-rednoir shadow-[0_0_40px_rgba(239,35,60,0.25)]">
+      <div className="relative transform -rotate-1 sm:-rotate-2 scale-105 overflow-hidden w-full py-4 sm:py-5 bg-gradient-to-r from-noir-950 via-black to-noir-950 border-y-2 border-rednoir shadow-[0_0_40px_rgba(239,35,60,0.25)]">
         
         {/* Infinite scrolling ticker */}
         <div className="flex w-max animate-kinetic-ticker">

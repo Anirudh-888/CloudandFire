@@ -64,7 +64,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative flex flex-col font-sans selection:bg-rednoir selection:text-white">
+    <div className="min-h-screen bg-black text-white relative flex flex-col font-sans selection:bg-rednoir selection:text-white w-full max-w-full overflow-x-clip min-w-0">
       
       {/* Sticky Header with Floating Glassmorphism Pill Nav */}
       <Navbar 
@@ -73,7 +73,7 @@ export function App() {
       />
 
       {/* Main Single Page Layout */}
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full min-w-0">
         
         {/* Section 1: Sticky Header & Hero */}
         <Hero 

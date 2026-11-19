@@ -9,7 +9,7 @@ export const FounderModal = ({ isOpen, onClose, onBookConsultation }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/85 backdrop-blur-2xl animate-fade-in">
       
       <div 
-        className="relative w-full max-w-2xl rounded-3xl border border-rednoir/40 bg-[#09090c] p-6 sm:p-10 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.95),0_0_50px_rgba(239,35,60,0.2)] overflow-hidden my-8"
+        className="relative w-full max-w-2xl rounded-3xl border border-rednoir/40 bg-[#09090c] p-4 sm:p-10 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.95),0_0_50px_rgba(239,35,60,0.2)] overflow-hidden my-6 sm:my-8 min-w-0"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Glow ambient background */}
@@ -19,17 +19,17 @@ export const FounderModal = ({ isOpen, onClose, onBookConsultation }) => {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-full border border-zinc-800 bg-zinc-950/80 text-zinc-400 hover:text-white hover:border-rednoir transition-colors"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border border-zinc-800 bg-zinc-950/80 text-zinc-400 hover:text-white hover:border-rednoir transition-colors"
           aria-label="Close founder profile"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Founder Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-6 border-b border-zinc-800/80">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 pb-6 border-b border-zinc-800/80">
           
           {/* Avatar / Profile Initials */}
-          <div className="relative h-20 w-20 rounded-2xl overflow-hidden border-2 border-rednoir/40 p-1 bg-black flex items-center justify-center shadow-[0_0_25px_rgba(239,35,60,0.25)] shrink-0">
+          <div className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-2xl overflow-hidden border-2 border-rednoir/40 p-1 bg-black flex items-center justify-center shadow-[0_0_25px_rgba(239,35,60,0.25)] shrink-0">
             <img 
               src="/cloud-and-fire-mark.png" 
               alt="Founder Mark" 

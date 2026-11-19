@@ -3,7 +3,7 @@ import { ArrowDown, ArrowUpRight, Layers, MapPin } from 'lucide-react';
 
 export const Hero = ({ onBookConsultation, onExploreWork }) => {
   return (
-    <section id="hero" className="relative pt-32 sm:pt-36 pb-8 sm:pb-10 px-4 sm:px-6 lg:px-8 red-noir-grid">
+    <section id="hero" className="relative pt-32 sm:pt-36 pb-8 sm:pb-10 px-4 sm:px-6 lg:px-8 red-noir-grid overflow-hidden w-full max-w-full">
       
       {/* Controlled Radial Red Glow Accents */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[350px] sm:h-[450px] bg-rednoir/15 rounded-full blur-[130px] pointer-events-none -z-10" />
@@ -16,27 +16,27 @@ export const Hero = ({ onBookConsultation, onExploreWork }) => {
       <div className="relative max-w-5xl mx-auto text-center flex flex-col items-center z-10 w-full">
         
         {/* Metadata Subtext Badges (Strictly Matching Specification) */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-6 sm:mb-8">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
           
           {/* Badge 1: AGENCY FOR STARTUPS & ENTERPRISE */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-rednoir/30 bg-black/80 backdrop-blur-md shadow-[0_0_15px_rgba(239,35,60,0.15)]">
-            <span className="w-2 h-2 rounded-full bg-rednoir animate-pulse" />
-            <span className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.2em] uppercase text-zinc-200">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-rednoir/30 bg-black/80 backdrop-blur-md shadow-[0_0_15px_rgba(239,35,60,0.15)]">
+            <span className="w-2 h-2 rounded-full bg-rednoir animate-pulse shrink-0" />
+            <span className="text-[10px] sm:text-xs font-mono font-semibold tracking-[0.16em] sm:tracking-[0.2em] uppercase text-zinc-200">
               AGENCY FOR STARTUPS & ENTERPRISE
             </span>
           </div>
 
           {/* Badge 2: BASED IN BENGALURU */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-zinc-800 bg-zinc-950/80 backdrop-blur-md">
-            <MapPin className="w-3.5 h-3.5 text-rednoir" />
-            <span className="text-[11px] sm:text-xs font-mono font-medium tracking-[0.18em] uppercase text-zinc-300">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-800 bg-zinc-950/80 backdrop-blur-md">
+            <MapPin className="w-3.5 h-3.5 text-rednoir shrink-0" />
+            <span className="text-[10px] sm:text-xs font-mono font-medium tracking-[0.16em] sm:tracking-[0.18em] uppercase text-zinc-300">
               BASED IN BENGALURU
             </span>
           </div>
 
           {/* Status Indicator */}
           <div className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-950/20 text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping shrink-0" />
             <span className="text-[10px] font-mono tracking-wider uppercase font-semibold">
               ACCEPTING Q1/Q2 ENGAGEMENTS
             </span>
@@ -45,7 +45,7 @@ export const Hero = ({ onBookConsultation, onExploreWork }) => {
         </div>
 
         {/* Fluid, Balanced Massive Hero Typography (Space Grotesk) */}
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-black font-display tracking-tight leading-[1.12] sm:leading-[1.08] text-white uppercase max-w-5xl">
+        <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-black font-display tracking-tight leading-[1.12] sm:leading-[1.08] text-white uppercase max-w-5xl break-words">
           <span className="block">
             ENGINEERING ENTERPRISE PLATFORMS
           </span>
@@ -58,7 +58,7 @@ export const Hero = ({ onBookConsultation, onExploreWork }) => {
         </h1>
 
         {/* Disciplined Body Copy (Inter) */}
-        <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-3xl font-sans font-normal leading-relaxed">
+        <p className="mt-6 sm:mt-8 text-sm sm:text-lg md:text-xl text-zinc-400 max-w-3xl font-sans font-normal leading-relaxed">
           Cloud & Fire builds production-grade geospatial platforms, voice-first operational AI, and distributed software systems. High velocity from prototype to enterprise scale.
         </p>
 

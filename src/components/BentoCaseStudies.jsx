@@ -25,7 +25,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
   const currentStage = evntpulseStageData[activeStageIndex] || evntpulseStageData[0];
 
   return (
-    <section id="proof-of-work" className="relative pt-10 sm:pt-14 pb-24 sm:pb-32 px-4 sm:px-6 lg:px-8 bg-obsidian overflow-hidden">
+    <section id="proof-of-work" className="relative pt-10 sm:pt-14 pb-24 sm:pb-32 px-4 sm:px-6 lg:px-8 bg-obsidian overflow-hidden w-full max-w-full">
       
       {/* Background ambient red glow */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-rednoir/10 rounded-full blur-[140px] pointer-events-none -z-10" />
@@ -62,12 +62,12 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
           {/* =========================================================================
               CARD 1: HELIRI BENGALURU (7 cols) - Civic Grievance & Spatial Mapping
              ========================================================================= */}
-          <div className="lg:col-span-7 bento-card p-6 sm:p-8 flex flex-col justify-between group">
+          <div className="lg:col-span-7 bento-card p-4 sm:p-8 flex flex-col justify-between group min-w-0">
             
             {/* Top Bar: Tags + Action */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                   <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold tracking-wider uppercase bg-rednoir/20 text-rednoir border border-rednoir/40">
                     Civic & Spatial
                   </span>
@@ -91,7 +91,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
               </div>
 
               {/* Title & Tagline */}
-              <h3 className="text-2xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors">
+              <h3 className="text-xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors break-words">
                 {projects[0].name}
               </h3>
               <p className="text-xs sm:text-sm font-mono text-rednoir uppercase tracking-wider mt-1">
@@ -104,26 +104,26 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
             </div>
 
             {/* Interactive Leaflet Spatial Simulator (Driven by heliriWardData) */}
-            <div className="my-6 rounded-xl border border-zinc-800 bg-black/90 p-4 shadow-inner relative overflow-hidden">
+            <div className="my-5 sm:my-6 rounded-xl border border-zinc-800 bg-black/90 p-3 sm:p-4 shadow-inner relative overflow-hidden min-w-0">
               <div className="flex items-center justify-between mb-3 text-xs font-mono text-zinc-400 border-b border-zinc-800/80 pb-2.5">
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-rednoir" />
-                  <span className="text-white font-semibold">Ward Spatial Telemetry View</span>
+                  <MapPin className="w-3.5 h-3.5 text-rednoir shrink-0" />
+                  <span className="text-white font-semibold truncate">Ward Spatial Telemetry View</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 shrink-0">
                   <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[10px] text-zinc-400 font-mono tabular-nums">198 Wards Mapped</span>
+                  <span className="text-[10px] text-zinc-400 font-mono tabular-nums">198 Wards</span>
                 </div>
               </div>
 
               {/* Ward Selector Tabs */}
-              <div className="flex flex-wrap items-center gap-2 mb-3">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3">
                 <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mr-1">Select Ward:</span>
                 {['Koramangala', 'HSR Layout', 'Indiranagar', 'Bellandur'].map(ward => (
                   <button
                     key={ward}
                     onClick={() => setSelectedWard(ward)}
-                    className={`px-3 py-1 rounded text-xs font-mono transition-all focus:outline-none ${
+                    className={`px-2.5 sm:px-3 py-1 rounded text-[11px] sm:text-xs font-mono transition-all focus:outline-none ${
                       selectedWard === ward 
                         ? 'bg-rednoir text-white font-semibold shadow-[0_0_12px_rgba(239,35,60,0.4)]' 
                         : 'bg-zinc-900 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-850'
@@ -135,17 +135,17 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
               </div>
 
               {/* Geospatial Map Viewport & State Machine Readout */}
-              <div className="relative rounded-lg bg-zinc-950 border border-zinc-800/70 p-3.5 flex flex-col justify-between overflow-hidden">
+              <div className="relative rounded-lg bg-zinc-950 border border-zinc-800/70 p-3 sm:p-3.5 flex flex-col justify-between overflow-hidden min-w-0">
                 <div className="absolute inset-0 red-noir-grid-dense opacity-35" />
 
                 {/* Spatial Coordinate Header */}
-                <div className="relative z-10 flex flex-wrap items-center justify-between text-[11px] font-mono text-zinc-400 border-b border-zinc-900 pb-2 mb-3 gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-zinc-500">{currentWard.epsg}</span>
-                    <span className="text-zinc-600">•</span>
-                    <span className="text-zinc-300 font-medium tabular-nums">{currentWard.coordinates}</span>
+                <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between text-[11px] font-mono text-zinc-400 border-b border-zinc-900 pb-2 mb-3 gap-1.5 sm:gap-2 min-w-0">
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap min-w-0">
+                    <span className="text-zinc-500 shrink-0">{currentWard.epsg}</span>
+                    <span className="text-zinc-600 shrink-0">•</span>
+                    <span className="text-zinc-300 font-medium tabular-nums break-all sm:break-normal">{currentWard.coordinates}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 shrink-0">
                     <span className="px-2 py-0.5 rounded bg-zinc-900 text-rednoir font-bold text-[10px] border border-rednoir/30">
                       BBMP Ward #{currentWard.wardNumber}
                     </span>
@@ -157,10 +157,10 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                 <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-2.5 my-1">
                   
                   {/* Primary Issue Card */}
-                  <div className="p-2.5 rounded bg-black/90 border border-rednoir/50 backdrop-blur-sm">
+                  <div className="p-2.5 rounded bg-black/90 border border-rednoir/50 backdrop-blur-sm min-w-0">
                     <div className="flex items-center justify-between text-[10px] font-mono mb-1">
-                      <span className="text-rednoir font-bold uppercase">{currentWard.primaryIssue.priority} PRIORITY</span>
-                      <span className="text-zinc-500 tabular-nums">{currentWard.primaryIssue.reportedAt}</span>
+                      <span className="text-rednoir font-bold uppercase truncate">{currentWard.primaryIssue.priority} PRIORITY</span>
+                      <span className="text-zinc-500 tabular-nums shrink-0">{currentWard.primaryIssue.reportedAt}</span>
                     </div>
                     <div className="text-xs font-semibold text-white truncate" title={currentWard.primaryIssue.category}>
                       {currentWard.primaryIssue.category}
@@ -175,10 +175,10 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                   </div>
 
                   {/* Secondary Hotspot Card */}
-                  <div className="p-2.5 rounded bg-black/90 border border-emerald-500/40 backdrop-blur-sm">
+                  <div className="p-2.5 rounded bg-black/90 border border-emerald-500/40 backdrop-blur-sm min-w-0">
                     <div className="flex items-center justify-between text-[10px] font-mono mb-1">
-                      <span className="text-emerald-400 font-bold uppercase">HOTSPOT MONITORED</span>
-                      <span className="text-emerald-400">RESOLVED</span>
+                      <span className="text-emerald-400 font-bold uppercase truncate">HOTSPOT MONITORED</span>
+                      <span className="text-emerald-400 shrink-0">RESOLVED</span>
                     </div>
                     <div className="text-xs font-semibold text-white truncate" title={currentWard.secondaryHotspot.category}>
                       {currentWard.secondaryHotspot.category}
@@ -193,10 +193,10 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                   </div>
 
                   {/* Critical Escalation Card */}
-                  <div className="p-2.5 rounded bg-black/90 border border-red-500/40 backdrop-blur-sm">
+                  <div className="p-2.5 rounded bg-black/90 border border-red-500/40 backdrop-blur-sm min-w-0">
                     <div className="flex items-center justify-between text-[10px] font-mono mb-1">
-                      <span className="text-rednoir font-bold uppercase">SLA ESCALATION</span>
-                      <span className="w-2 h-2 rounded-full bg-rednoir animate-pulse" />
+                      <span className="text-rednoir font-bold uppercase truncate">SLA ESCALATION</span>
+                      <span className="w-2 h-2 rounded-full bg-rednoir animate-pulse shrink-0" />
                     </div>
                     <div className="text-xs font-semibold text-white truncate" title={currentWard.criticalEscalation.category}>
                       {currentWard.criticalEscalation.category}
@@ -213,15 +213,15 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                 </div>
 
                 {/* Spatial Engine Telemetry Footer */}
-                <div className="relative z-10 flex flex-wrap items-center justify-between text-[10px] font-mono text-zinc-400 pt-2.5 mt-2 border-t border-zinc-900 gap-2">
-                  <div className="flex items-center gap-2">
+                <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between text-[10px] font-mono text-zinc-400 pt-2.5 mt-2 border-t border-zinc-900 gap-1.5 sm:gap-2 min-w-0">
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                     <span className="text-rednoir font-semibold">PostGIS ST_Contains:</span>
                     <span className="text-white font-mono tabular-nums">{currentWard.queryLatency}</span>
                     <span className="text-zinc-600">|</span>
-                    <span className="text-zinc-400 tabular-nums">{currentWard.polygonVertices} GeoJSON vertices</span>
+                    <span className="text-zinc-400 tabular-nums">{currentWard.polygonVertices} vertices</span>
                   </div>
                   <div className="text-zinc-500">
-                    Active Assigned Team: <span className="text-zinc-300">{currentWard.primaryIssue.team}</span>
+                    Active Team: <span className="text-zinc-300">{currentWard.primaryIssue.team}</span>
                   </div>
                 </div>
 
@@ -229,11 +229,11 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
             </div>
 
             {/* Bottom Highlights & Metrics (Tabular Numbers) */}
-            <div className="pt-4 border-t border-zinc-900 grid grid-cols-3 gap-2 text-center">
+            <div className="pt-4 border-t border-zinc-900 grid grid-cols-3 gap-1.5 sm:gap-2 text-center">
               {currentWard.metrics.map(metric => (
-                <div key={metric.label} className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                  <div className="text-sm font-bold text-white font-mono tabular-nums">{metric.value}</div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">{metric.label}</div>
+                <div key={metric.label} className="p-1.5 sm:p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900 min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-white font-mono tabular-nums truncate">{metric.value}</div>
+                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">{metric.label}</div>
                 </div>
               ))}
             </div>
@@ -243,11 +243,11 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
           {/* =========================================================================
               CARD 2: RETAIQ (5 cols) - Voice-First AI Store Assistant
              ========================================================================= */}
-          <div className="lg:col-span-5 bento-card p-6 sm:p-8 flex flex-col justify-between group">
+          <div className="lg:col-span-5 bento-card p-4 sm:p-8 flex flex-col justify-between group min-w-0">
             
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                   <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold tracking-wider uppercase bg-brand-blue/20 text-brand-blue border border-brand-blue/40">
                     Voice-First AI
                   </span>
@@ -269,7 +269,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                 </button>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors">
+              <h3 className="text-xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors break-words">
                 {projects[1].name}
               </h3>
               <p className="text-xs sm:text-sm font-mono text-rednoir uppercase tracking-wider mt-1">
@@ -282,32 +282,32 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
             </div>
 
             {/* Interactive Voice Command State Machine */}
-            <div className="my-6 rounded-xl border border-zinc-800 bg-black/90 p-4 shadow-inner">
+            <div className="my-5 sm:my-6 rounded-xl border border-zinc-800 bg-black/90 p-3 sm:p-4 shadow-inner min-w-0">
               <div className="flex items-center justify-between mb-3 text-xs font-mono text-zinc-400 border-b border-zinc-800/80 pb-2">
                 <div className="flex items-center gap-2">
-                  <Mic className={`w-3.5 h-3.5 text-brand-blue ${isSimulatingVoice ? 'animate-bounce' : 'animate-pulse'}`} />
-                  <span className="text-white font-semibold">Store Manager Voice Dispatch</span>
+                  <Mic className={`w-3.5 h-3.5 text-brand-blue shrink-0 ${isSimulatingVoice ? 'animate-bounce' : 'animate-pulse'}`} />
+                  <span className="text-white font-semibold truncate">Store Manager Voice Dispatch</span>
                 </div>
-                <span className="text-[10px] text-zinc-500 font-mono">Select Prompt:</span>
+                <span className="text-[10px] text-zinc-500 font-mono shrink-0">Select Prompt:</span>
               </div>
 
-              {/* Sample Voice Prompts Selector */}
-              <div className="grid grid-cols-2 gap-1.5 mb-3">
+              {/* Sample Voice Prompts Selector (Single column on mobile for full legibility, 2 cols on sm+) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                 {retaiqVoiceData.map((item, idx) => (
                   <button
                     key={item.id}
                     onClick={() => handleVoiceQuerySelect(idx)}
-                    className={`text-left p-2 rounded-lg text-xs font-mono transition-all border focus:outline-none ${
+                    className={`text-left p-2.5 sm:p-2 rounded-lg text-xs font-mono transition-all border focus:outline-none min-w-0 ${
                       activeVoiceIndex === idx 
                         ? 'bg-zinc-900 border-rednoir/60 text-white shadow-[0_0_12px_rgba(239,35,60,0.25)]' 
                         : 'bg-zinc-950/60 text-zinc-400 hover:text-zinc-200 border-zinc-850'
                     }`}
                   >
-                    <div className="flex items-center justify-between mb-0.5">
-                      <span className="text-[10px] font-bold text-zinc-400 truncate">{item.label}</span>
-                      <span className="text-[9px] text-rednoir font-bold font-mono">RUN</span>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] font-bold text-zinc-300 truncate">{item.label}</span>
+                      <span className="text-[9px] text-rednoir font-bold font-mono shrink-0">RUN</span>
                     </div>
-                    <div className="text-[11px] text-zinc-300 truncate">
+                    <div className="text-[11px] text-zinc-400 leading-snug break-words">
                       "{item.audioQuery}"
                     </div>
                   </button>
@@ -315,13 +315,13 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
               </div>
 
               {/* Simulated Audio Spectrum Waveform & Parsing Feedback */}
-              <div className="rounded-lg bg-zinc-950 border border-zinc-800/80 p-3">
+              <div className="rounded-lg bg-zinc-950 border border-zinc-800/80 p-3 min-w-0">
                 <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 mb-2">
-                  <span className="text-brand-blue font-bold flex items-center gap-1.5">
-                    <Volume2 className="w-3 h-3" />
+                  <span className="text-brand-blue font-bold flex items-center gap-1.5 truncate">
+                    <Volume2 className="w-3 h-3 shrink-0" />
                     <span>AUDIO RECOGNITION</span>
                   </span>
-                  <div className="flex items-center gap-2 font-mono">
+                  <div className="flex items-center gap-2 font-mono shrink-0">
                     <span className="text-zinc-500">Latency:</span>
                     <span className="text-emerald-400 font-bold tabular-nums">{activeVoice.latency}</span>
                   </div>
@@ -345,7 +345,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                 </div>
 
                 {/* Structured Deterministic Intent & Action Extraction */}
-                <div className="p-3 rounded bg-black/85 border border-zinc-800 font-mono text-xs space-y-2">
+                <div className="p-3 rounded bg-black/85 border border-zinc-800 font-mono text-xs space-y-2 min-w-0">
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-900 pb-2 text-[10px]">
                     <div className="flex items-center gap-1.5">
                       <span className="text-zinc-500">INTENT:</span>
@@ -359,18 +359,18 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
 
                   <div className="text-zinc-300 text-[11px] leading-relaxed">
                     <span className="text-zinc-500 block text-[10px] mb-0.5">RETAIL INVENTORY LEDGER:</span>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white font-semibold">{activeVoice.item}</span>
-                      <span className="text-white font-mono font-bold tabular-nums bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-white font-semibold truncate">{activeVoice.item}</span>
+                      <span className="text-white font-mono font-bold tabular-nums bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800 shrink-0">
                         {activeVoice.stockLevel}
                       </span>
                     </div>
-                    <div className="text-zinc-400 text-[10px] mt-1">
+                    <div className="text-zinc-400 text-[10px] mt-1 truncate">
                       {activeVoice.location} • <span className="text-zinc-500">{activeVoice.sku}</span>
                     </div>
                   </div>
 
-                  <div className="pt-2 border-t border-zinc-900 text-[11px] text-zinc-300">
+                  <div className="pt-2 border-t border-zinc-900 text-[11px] text-zinc-300 break-words">
                     <span className="text-rednoir font-bold">ACTION: </span>
                     <span>{activeVoice.actionOutput}</span>
                   </div>
@@ -380,11 +380,11 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
             </div>
 
             {/* Bottom Metrics */}
-            <div className="pt-4 border-t border-zinc-900 grid grid-cols-3 gap-2 text-center">
+            <div className="pt-4 border-t border-zinc-900 grid grid-cols-3 gap-1.5 sm:gap-2 text-center">
               {projects[1].metrics.map(metric => (
-                <div key={metric.label} className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                  <div className="text-sm font-bold text-white font-mono tabular-nums">{metric.value}</div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">{metric.label}</div>
+                <div key={metric.label} className="p-1.5 sm:p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900 min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-white font-mono tabular-nums truncate">{metric.value}</div>
+                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">{metric.label}</div>
                 </div>
               ))}
             </div>
@@ -394,12 +394,12 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
           {/* =========================================================================
               CARD 3: EVNTPULSE (Full 12 cols) - Analytics & Event Montage Engine
              ========================================================================= */}
-          <div className="lg:col-span-12 bento-card p-6 sm:p-8 flex flex-col lg:flex-row gap-8 justify-between group">
+          <div className="lg:col-span-12 bento-card p-4 sm:p-8 flex flex-col lg:flex-row gap-6 lg:gap-8 justify-between group min-w-0">
             
-            <div className="lg:w-1/2 flex flex-col justify-between">
+            <div className="lg:w-1/2 flex flex-col justify-between min-w-0">
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                     <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold tracking-wider uppercase bg-amber-500/20 text-amber-400 border border-amber-500/40">
                       Telemetry & Media Pipeline
                     </span>
@@ -422,7 +422,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                   </button>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors">
+                <h3 className="text-xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors break-words">
                   {projects[2].name}
                 </h3>
                 <p className="text-xs sm:text-sm font-mono text-rednoir uppercase tracking-wider mt-1">
@@ -444,41 +444,41 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
               </div>
 
               {/* Bottom Metrics with Tabular Numbers */}
-              <div className="pt-6 mt-6 border-t border-zinc-900 grid grid-cols-3 gap-3 text-center">
-                <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                  <div className="text-sm font-bold text-white font-mono tabular-nums">{currentStage.throughput}</div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">Telemetry Rate</div>
+              <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-zinc-900 grid grid-cols-3 gap-1.5 sm:gap-3 text-center">
+                <div className="p-1.5 sm:p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900 min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-white font-mono tabular-nums truncate">{currentStage.throughput}</div>
+                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">Telemetry Rate</div>
                 </div>
-                <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                  <div className="text-sm font-bold text-white font-mono tabular-nums">{currentStage.dataBitrate}</div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">Stream Bitrate</div>
+                <div className="p-1.5 sm:p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900 min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-white font-mono tabular-nums truncate">{currentStage.dataBitrate}</div>
+                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">Stream Bitrate</div>
                 </div>
-                <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                  <div className="text-sm font-bold text-white font-mono tabular-nums">{currentStage.fps}</div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">Framerate Lock</div>
+                <div className="p-1.5 sm:p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900 min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-white font-mono tabular-nums truncate">{currentStage.fps}</div>
+                  <div className="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5 truncate">Framerate Lock</div>
                 </div>
               </div>
             </div>
 
             {/* Right: EvntPulse Pipeline State Machine & Live Synchronized Terminal */}
-            <div className="lg:w-1/2 flex flex-col justify-between rounded-xl border border-zinc-800 bg-black/90 p-4 sm:p-5 shadow-inner">
+            <div className="lg:w-1/2 flex flex-col justify-between rounded-xl border border-zinc-800 bg-black/90 p-3.5 sm:p-5 shadow-inner min-w-0">
               
               <div className="flex items-center justify-between pb-3 border-b border-zinc-800 text-xs font-mono text-zinc-400">
-                <div className="flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-amber-400 animate-pulse" />
-                  <span className="text-white font-semibold">Automated Media Assembly Pipeline</span>
+                <div className="flex items-center gap-2 min-w-0">
+                  <Activity className="w-4 h-4 text-amber-400 animate-pulse shrink-0" />
+                  <span className="text-white font-semibold truncate">Automated Media Assembly Pipeline</span>
                 </div>
-                <span className="text-[10px] text-emerald-400 font-mono tabular-nums">{currentStage.queueDepth}</span>
+                <span className="text-[10px] text-emerald-400 font-mono tabular-nums shrink-0">{currentStage.queueDepth}</span>
               </div>
 
               {/* 4 Pipeline Stages Selector (Requirement: Stage Capture, Grand Pulse, Speaker Clean-up, Closing Montage) */}
-              <div className="my-4">
+              <div className="my-4 min-w-0">
                 <div className="text-[11px] font-mono text-zinc-400 mb-2.5 flex items-center justify-between">
                   <span>SELECT PIPELINE STAGE:</span>
                   <span className="text-rednoir font-bold tabular-nums">{currentStage.gpuLoad}</span>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2">
                   {evntpulseStageData.map((stage, idx) => {
                     const isSelected = activeStageIndex === idx;
 
@@ -486,18 +486,18 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                       <button 
                         key={stage.id}
                         onClick={() => setActiveStageIndex(idx)}
-                        className={`p-2.5 rounded-lg border text-left transition-all focus:outline-none ${
+                        className={`p-2 sm:p-2.5 rounded-lg border text-left transition-all focus:outline-none min-w-0 ${
                           isSelected 
                             ? 'border-rednoir bg-rednoir/15 shadow-[0_0_15px_rgba(239,35,60,0.3)] ring-1 ring-rednoir/60' 
                             : 'border-zinc-800 bg-zinc-950 hover:border-zinc-700'
                         }`}
                       >
-                        <div className="h-9 rounded bg-zinc-900 border border-zinc-850 flex items-center justify-center mb-1.5 relative overflow-hidden">
+                        <div className="h-8 sm:h-9 rounded bg-zinc-900 border border-zinc-850 flex items-center justify-center mb-1.5 relative overflow-hidden">
                           <Play className={`w-3.5 h-3.5 ${isSelected ? 'text-rednoir' : 'text-zinc-500'}`} />
-                          <span className="absolute bottom-0.5 right-1 text-[9px] font-mono text-zinc-500 tabular-nums">{stage.timestamp}</span>
+                          <span className="absolute bottom-0.5 right-1 text-[8px] sm:text-[9px] font-mono text-zinc-500 tabular-nums">{stage.timestamp}</span>
                         </div>
-                        <div className="text-[11px] font-semibold text-white truncate font-display">{stage.name}</div>
-                        <div className={`text-[9px] font-mono mt-0.5 font-bold ${
+                        <div className="text-[10px] sm:text-[11px] font-semibold text-white truncate font-display">{stage.name}</div>
+                        <div className={`text-[8px] sm:text-[9px] font-mono mt-0.5 font-bold truncate ${
                           isSelected ? 'text-rednoir' : 'text-zinc-500'
                         }`}>
                           {stage.stageStatus}
@@ -511,25 +511,25 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
               {/* Worker Node Readout */}
               <div className="mb-3 px-3 py-2 rounded-lg bg-zinc-950/80 border border-zinc-850 flex items-center justify-between text-[11px] font-mono">
                 <div className="flex items-center gap-2">
-                  <Cpu className="w-3.5 h-3.5 text-rednoir" />
-                  <span className="text-zinc-300 font-semibold">{currentStage.activeWorker}</span>
+                  <Cpu className="w-3.5 h-3.5 text-rednoir shrink-0" />
+                  <span className="text-zinc-300 font-semibold truncate">{currentStage.activeWorker}</span>
                 </div>
-                <span className="text-zinc-500 text-[10px] tabular-nums">{currentStage.workerThreads}</span>
+                <span className="text-zinc-500 text-[10px] tabular-nums shrink-0">{currentStage.workerThreads}</span>
               </div>
 
               {/* Live Synchronized Telemetry & Terminal Logs */}
-              <div className="p-3 rounded-lg bg-zinc-950 border border-zinc-800 font-mono text-xs">
+              <div className="p-2.5 sm:p-3 rounded-lg bg-zinc-950 border border-zinc-800 font-mono text-xs overflow-hidden min-w-0">
                 <div className="text-[10px] text-zinc-500 mb-2 flex items-center justify-between border-b border-zinc-900 pb-1.5">
-                  <div className="flex items-center gap-1.5">
-                    <Terminal className="w-3 h-3 text-rednoir" />
-                    <span>SYNCHRONIZED STAGE STDOUT</span>
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <Terminal className="w-3 h-3 text-rednoir shrink-0" />
+                    <span className="truncate">SYNCHRONIZED STAGE STDOUT</span>
                   </div>
-                  <span className="text-zinc-600 tabular-nums">STAGE ID: {currentStage.id.toUpperCase()}</span>
+                  <span className="text-zinc-600 tabular-nums text-[9px] sm:text-[10px] shrink-0">STAGE ID: {currentStage.id.toUpperCase()}</span>
                 </div>
                 
-                <div className="space-y-1">
+                <div className="space-y-1 overflow-hidden min-w-0">
                   {currentStage.logStdout.map((logLine, lIdx) => (
-                    <div key={lIdx} className="text-zinc-300 text-[11px] leading-relaxed">
+                    <div key={lIdx} className="text-zinc-300 text-[10px] sm:text-[11px] leading-relaxed break-words break-all sm:break-normal min-w-0">
                       {logLine}
                     </div>
                   ))}

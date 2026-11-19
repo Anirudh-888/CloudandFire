@@ -6,7 +6,7 @@ export const Capabilities = ({ onBookConsultation }) => {
   const [activeTab, setActiveTab] = useState('enterprise-platforms');
 
   return (
-    <section id="capabilities" className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-zinc-900/80">
+    <section id="capabilities" className="relative py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-zinc-900/80 overflow-hidden w-full max-w-full">
       
       {/* Background Glow */}
       <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] bg-rednoir/10 rounded-full blur-[150px] pointer-events-none -z-10" />
@@ -43,7 +43,7 @@ export const Capabilities = ({ onBookConsultation }) => {
               <div 
                 key={pillar.id}
                 onClick={() => setActiveTab(pillar.id)}
-                className={`cursor-pointer transition-all duration-300 rounded-2xl p-6 sm:p-10 border-2 bg-gradient-to-b from-noir-900/90 to-noir-950/95 backdrop-blur-md ${
+                className={`cursor-pointer transition-all duration-300 rounded-2xl p-4 sm:p-10 border-2 bg-gradient-to-b from-noir-900/90 to-noir-950/95 backdrop-blur-md min-w-0 ${
                   isActive 
                     ? 'border-rednoir shadow-[0_0_35px_rgba(239,35,60,0.22)]' 
                     : 'border-zinc-800/80 hover:border-zinc-700'
@@ -112,7 +112,7 @@ export const Capabilities = ({ onBookConsultation }) => {
                       </div>
                       <ul className="divide-y divide-white/10 border-t border-b border-white/10">
                         {pillar.deliverables.map((del, idx) => (
-                          <li key={idx} className="py-2.5 flex items-start gap-3 text-xs sm:text-sm text-zinc-300 font-sans font-normal">
+                          <li key={idx} className="py-2 sm:py-2.5 flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-zinc-300 font-sans font-normal min-w-0">
                             <span className="text-rednoir font-mono select-none shrink-0 font-bold">—</span>
                             <span className="leading-relaxed">{del}</span>
                           </li>

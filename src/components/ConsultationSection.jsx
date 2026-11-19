@@ -47,7 +47,7 @@ export const ConsultationSection = () => {
   };
 
   return (
-    <section id="consultation" className="relative py-28 sm:py-36 px-4 sm:px-6 lg:px-8 bg-black border-t border-zinc-900/80 overflow-hidden">
+    <section id="consultation" className="relative py-20 sm:py-36 px-4 sm:px-6 lg:px-8 bg-black border-t border-zinc-900/80 overflow-hidden w-full max-w-full">
       
       {/* Controlled Atmospheric Red & Blue Glow Accents */}
       <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[450px] bg-brand-blue/10 rounded-full blur-[160px] pointer-events-none -z-10" />
@@ -77,9 +77,9 @@ export const ConsultationSection = () => {
         </div>
 
         {/* High-End Enterprise Card Container */}
-        <div className="relative rounded-3xl p-[1px] bg-gradient-to-b from-rednoir/40 via-zinc-800/60 to-rednoir/20 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.95),0_0_40px_rgba(239,35,60,0.15)]">
+        <div className="relative rounded-3xl p-[1px] bg-gradient-to-b from-rednoir/40 via-zinc-800/60 to-rednoir/20 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.95),0_0_40px_rgba(239,35,60,0.15)] min-w-0">
           
-          <div className="relative rounded-[23px] bg-[#08080a] p-6 sm:p-10 md:p-12 overflow-hidden">
+          <div className="relative rounded-[23px] bg-[#08080a] p-4 sm:p-10 md:p-12 overflow-hidden min-w-0">
             
             {/* Subtle corner light accents */}
             <div className="absolute top-0 left-0 w-44 h-44 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none" />
@@ -216,7 +216,7 @@ export const ConsultationSection = () => {
                   <label className="block text-xs font-mono text-zinc-300 uppercase tracking-wider mb-2.5 font-medium">
                     Primary Service Category *
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs font-mono">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 text-xs font-mono">
                     {[
                       'Enterprise Web & Mobile',
                       'Practical AI & LLM Automation',
@@ -227,16 +227,16 @@ export const ConsultationSection = () => {
                         key={cat}
                         type="button"
                         onClick={() => setFormState({ ...formState, category: cat })}
-                        className={`p-3.5 rounded-xl text-left border transition-all focus:outline-none ${
+                        className={`p-3 sm:p-3.5 rounded-xl text-left border transition-all focus:outline-none min-w-0 ${
                           formState.category === cat
                             ? 'border-rednoir bg-rednoir/15 text-white font-semibold shadow-[0_0_18px_rgba(239,35,60,0.25)] ring-1 ring-rednoir/50'
                             : 'border-zinc-800/90 bg-[#040405] text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span>{cat}</span>
+                          <span className="truncate">{cat}</span>
                           {formState.category === cat && (
-                            <span className="w-2 h-2 rounded-full bg-rednoir" />
+                            <span className="w-2 h-2 rounded-full bg-rednoir shrink-0 ml-2" />
                           )}
                         </div>
                       </button>
@@ -259,13 +259,13 @@ export const ConsultationSection = () => {
                         key={t}
                         type="button"
                         onClick={() => setFormState({ ...formState, timeline: t })}
-                        className={`py-3 px-3 rounded-xl text-center border transition-all focus:outline-none tabular-nums ${
+                        className={`py-2.5 sm:py-3 px-2 sm:px-3 rounded-xl text-center border transition-all focus:outline-none tabular-nums min-w-0 ${
                           formState.timeline === t
                             ? 'border-rednoir bg-rednoir/15 text-white font-semibold ring-1 ring-rednoir/50'
                             : 'border-zinc-800/90 bg-[#040405] text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
                         }`}
                       >
-                        {t}
+                        <span className="truncate block">{t}</span>
                       </button>
                     ))}
                   </div>
@@ -303,23 +303,23 @@ export const ConsultationSection = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-rednoir via-red-600 to-[#d90429] hover:from-rednoir-deep hover:to-rednoir text-white font-bold text-sm sm:text-base uppercase tracking-wider transition-all duration-300 shadow-[0_0_35px_rgba(239,35,60,0.45)] hover:shadow-[0_0_50px_rgba(239,35,60,0.7)] flex items-center justify-center gap-2.5 active:scale-98 disabled:opacity-50 focus:outline-none"
+                  className="w-full py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-rednoir via-red-600 to-[#d90429] hover:from-rednoir-deep hover:to-rednoir text-white font-bold text-xs sm:text-base uppercase tracking-wider transition-all duration-300 shadow-[0_0_35px_rgba(239,35,60,0.45)] hover:shadow-[0_0_50px_rgba(239,35,60,0.7)] flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50 focus:outline-none min-w-0"
                 >
                   {loading ? (
                     <div className="flex items-center gap-2">
-                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      <span>Transmitting Intake to Lead Architect...</span>
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin shrink-0" />
+                      <span className="truncate">Transmitting Intake to Lead Architect...</span>
                     </div>
                   ) : (
                     <>
                       <span>Submit Technical Consultation</span>
-                      <Send className="w-4 h-4" />
+                      <Send className="w-4 h-4 shrink-0" />
                     </>
                   )}
                 </button>
 
                 {/* Security and SLA Trust Badges */}
-                <div className="pt-2 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-[11px] font-mono text-zinc-400">
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-[10px] sm:text-[11px] font-mono text-zinc-400">
                   <div className="flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Mutual NDA Protected</span>

@@ -8,7 +8,7 @@ export const ProjectModal = ({ project, onClose, onBookConsultation }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-xl animate-fade-in">
       
       <div 
-        className="relative w-full max-w-3xl rounded-2xl border-2 border-rednoir/60 bg-noir-950 p-6 sm:p-8 shadow-[0_0_60px_rgba(239,35,60,0.35)] overflow-hidden my-8"
+        className="relative w-full max-w-3xl rounded-2xl border-2 border-rednoir/60 bg-noir-950 p-4 sm:p-8 shadow-[0_0_60px_rgba(239,35,60,0.35)] overflow-hidden my-6 sm:my-8 min-w-0"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Glow ambient background */}
@@ -17,7 +17,7 @@ export const ProjectModal = ({ project, onClose, onBookConsultation }) => {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full border border-zinc-800 bg-zinc-900/80 text-zinc-400 hover:text-white hover:border-rednoir transition-colors"
+          className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full border border-zinc-800 bg-zinc-900/80 text-zinc-400 hover:text-white hover:border-rednoir transition-colors"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />

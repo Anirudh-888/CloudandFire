@@ -39,11 +39,11 @@ export const Navbar = ({ onOpenConsultation, onOpenFounder }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 transition-all duration-300 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 lg:px-8 py-3 sm:py-4 transition-all duration-300 pointer-events-none w-full max-w-full">
       <div className="max-w-6xl mx-auto flex items-center justify-between pointer-events-auto">
         
         {/* Floating Glassmorphism Pill Nav */}
-        <div className={`w-full flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300 ${
+        <div className={`w-full flex items-center justify-between px-3.5 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 ${
           scrolled 
             ? 'glass-pill shadow-[0_12px_36px_rgba(0,0,0,0.92)] border-rednoir/35 bg-black/85' 
             : 'glass-pill bg-black/65'
@@ -90,11 +90,11 @@ export const Navbar = ({ onOpenConsultation, onOpenFounder }) => {
             </button>
           </nav>
 
-          {/* Right Action: Glowing CTA Button */}
-          <div className="flex items-center gap-3">
+          {/* Right Action: Glowing CTA Button (hidden on <sm to prevent mobile crowding; accessible in drawer) */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={handleBookConsultation}
-              className="relative group overflow-hidden rounded-full p-[1px] focus:outline-none transition-all duration-300 active:scale-95"
+              className="hidden sm:inline-flex relative group overflow-hidden rounded-full p-[1px] focus:outline-none transition-all duration-300 active:scale-95"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-rednoir via-red-500 to-red-600 rounded-full opacity-80 group-hover:opacity-100 transition-opacity blur-[2px]" />
               

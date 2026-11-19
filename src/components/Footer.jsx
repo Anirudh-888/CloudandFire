@@ -13,7 +13,7 @@ export const Footer = ({ onOpenFounder }) => {
   };
 
   return (
-    <footer className="relative bg-black border-t-2 border-rednoir text-white pt-16 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden shadow-[0_-10px_35px_rgba(239,35,60,0.15)]">
+    <footer className="relative bg-black border-t-2 border-rednoir text-white pt-12 sm:pt-16 pb-10 sm:pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden shadow-[0_-10px_35px_rgba(239,35,60,0.15)] w-full max-w-full">
       
       {/* Background ambient red glow along top line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-rednoir/10 blur-[80px] pointer-events-none" />
@@ -24,7 +24,7 @@ export const Footer = ({ onOpenFounder }) => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-zinc-900 items-start">
           
           {/* Col 1: Agency Brand & Identity (Clean, Uncontained, Fluidly Aligned) */}
-          <div className="md:col-span-5 flex flex-col justify-between">
+          <div className="md:col-span-5 flex flex-col justify-between min-w-0">
             <div>
               {/* Uncontained Prominent Logo */}
               <div className="mb-4">
@@ -42,7 +42,7 @@ export const Footer = ({ onOpenFounder }) => {
           </div>
 
           {/* Col 2: Navigation Links */}
-          <div className="md:col-span-3">
+          <div className="md:col-span-3 min-w-0">
             <h4 className="text-xs font-mono text-rednoir uppercase tracking-widest font-bold mb-4">
               Navigation
             </h4>
@@ -102,31 +102,31 @@ export const Footer = ({ onOpenFounder }) => {
           </div>
 
           {/* Col 3: Real Projects Recap */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-4 min-w-0">
             <h4 className="text-xs font-mono text-rednoir uppercase tracking-widest font-bold mb-4">
               Featured Systems
             </h4>
             <ul className="space-y-3 text-xs font-mono">
-              <li className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-900 flex items-center justify-between">
-                <div>
-                  <div className="text-white font-semibold">HELIRI BENGALURU</div>
-                  <div className="text-zinc-500 text-[10px]">Civic & Spatial Mapping (React, Leaflet)</div>
+              <li className="p-2 sm:p-2.5 rounded-lg bg-zinc-950 border border-zinc-900 flex items-center justify-between min-w-0">
+                <div className="truncate mr-2">
+                  <div className="text-white font-semibold truncate">HELIRI BENGALURU</div>
+                  <div className="text-zinc-500 text-[10px] truncate">Civic & Spatial Mapping (React, Leaflet)</div>
                 </div>
-                <span className="text-emerald-400 text-[10px]">LIVE</span>
+                <span className="text-emerald-400 text-[10px] shrink-0">LIVE</span>
               </li>
-              <li className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-900 flex items-center justify-between">
-                <div>
-                  <div className="text-white font-semibold">RETAIQ</div>
-                  <div className="text-zinc-500 text-[10px]">Voice-First AI Store Assistant (FastAPI)</div>
+              <li className="p-2 sm:p-2.5 rounded-lg bg-zinc-950 border border-zinc-900 flex items-center justify-between min-w-0">
+                <div className="truncate mr-2">
+                  <div className="text-white font-semibold truncate">RETAIQ</div>
+                  <div className="text-zinc-500 text-[10px] truncate">Voice-First AI Store Assistant (FastAPI)</div>
                 </div>
-                <span className="text-brand-blue text-[10px]">PILOT</span>
+                <span className="text-brand-blue text-[10px] shrink-0">PILOT</span>
               </li>
-              <li className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-900 flex items-center justify-between">
-                <div>
-                  <div className="text-white font-semibold">EVNTPULSE</div>
-                  <div className="text-zinc-500 text-[10px]">Real-Time Montage Engine (Node, Mongo)</div>
+              <li className="p-2 sm:p-2.5 rounded-lg bg-zinc-950 border border-zinc-900 flex items-center justify-between min-w-0">
+                <div className="truncate mr-2">
+                  <div className="text-white font-semibold truncate">EVNTPULSE</div>
+                  <div className="text-zinc-500 text-[10px] truncate">Real-Time Montage Engine (Node, Mongo)</div>
                 </div>
-                <span className="text-amber-400 text-[10px]">ACTIVE</span>
+                <span className="text-amber-400 text-[10px] shrink-0">ACTIVE</span>
               </li>
             </ul>
           </div>
@@ -137,7 +137,7 @@ export const Footer = ({ onOpenFounder }) => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           
           {/* Exact Required Copyright Notice */}
-          <div className="text-xs font-mono text-zinc-500 text-center sm:text-left flex items-center gap-2">
+          <div className="text-xs font-mono text-zinc-500 text-center sm:text-left flex flex-wrap items-center justify-center sm:justify-start gap-2">
             <span>© 2026 Cloud and Fire. All rights reserved.</span>
             <span>•</span>
             <button 
