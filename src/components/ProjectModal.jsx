@@ -34,7 +34,7 @@ export const ProjectModal = ({ project, onClose, onBookConsultation }) => {
             </span>
           </div>
 
-          <h3 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight">
+          <h3 className="text-2xl sm:text-4xl font-bold text-white font-display tracking-tight">
             {project.name}
           </h3>
           <p className="text-sm font-mono text-rednoir uppercase tracking-wider mt-1">

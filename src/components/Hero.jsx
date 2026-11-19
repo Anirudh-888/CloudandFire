@@ -1,9 +1,9 @@
 import React from 'react';
-import { ArrowUpRight, Code2, Layers, MapPin, Sparkles, Terminal } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Layers, MapPin } from 'lucide-react';
 
 export const Hero = ({ onBookConsultation, onExploreWork }) => {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-32 pb-24 sm:pt-36 sm:pb-28 px-4 sm:px-6 lg:px-8 red-noir-grid">
+    <section id="hero" className="relative pt-32 sm:pt-36 pb-8 sm:pb-10 px-4 sm:px-6 lg:px-8 red-noir-grid">
       
       {/* Controlled Radial Red Glow Accents */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[350px] sm:h-[450px] bg-rednoir/15 rounded-full blur-[130px] pointer-events-none -z-10" />
@@ -44,21 +44,21 @@ export const Hero = ({ onBookConsultation, onExploreWork }) => {
 
         </div>
 
-        {/* Fluid, Balanced Massive Hero Typography (No single-word awkward breaks) */}
+        {/* Fluid, Balanced Massive Hero Typography (Space Grotesk) */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-black font-display tracking-tight leading-[1.12] sm:leading-[1.08] text-white uppercase max-w-5xl">
           <span className="block">
             ENGINEERING ENTERPRISE PLATFORMS
           </span>
           <span className="block mt-2 sm:mt-3">
             <span className="text-white">& PRACTICAL </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rednoir via-[#ff5e13] to-red-400 drop-shadow-[0_0_35px_rgba(239,35,60,0.55)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rednoir via-red-500 to-red-400 drop-shadow-[0_0_35px_rgba(239,35,60,0.55)]">
               AI SOLUTIONS
             </span>
           </span>
         </h1>
 
-        {/* Rigorous, Anti-AI Slop Subheading (Pure Real Context) */}
-        <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-3xl font-normal leading-relaxed">
+        {/* Disciplined Body Copy (Inter) */}
+        <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-3xl font-sans font-normal leading-relaxed">
           Cloud & Fire builds production-grade geospatial platforms, voice-first operational AI, and distributed software systems. High velocity from prototype to enterprise scale.
         </p>
 
@@ -85,45 +85,41 @@ export const Hero = ({ onBookConsultation, onExploreWork }) => {
 
         </div>
 
-        {/* Engineering Architecture Pillars Bar (No fake stats, pure technical capabilities) */}
-        <div className="mt-14 sm:mt-18 pt-8 border-t border-zinc-900 w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
-          
-          <div className="p-3.5 rounded-xl border border-zinc-900 bg-noir-950/80 backdrop-blur-sm">
-            <div className="text-[11px] font-mono tracking-wider text-rednoir uppercase flex items-center gap-1.5 mb-1 font-semibold">
-              <Code2 className="w-3.5 h-3.5" />
-              <span>Full-Stack</span>
-            </div>
-            <div className="text-sm font-semibold text-white">React & FastAPI</div>
-            <div className="text-xs text-zinc-500 mt-0.5">High-throughput async architectures</div>
-          </div>
+        {/* Interactive Rotating Circular Scroll Badge / Indicator with Balanced Spacing */}
+        <div className="mt-10 sm:mt-12 flex justify-center">
+          <button
+            onClick={onExploreWork}
+            className="group relative flex items-center justify-center w-28 h-28 sm:w-32 sm:h-32 transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none"
+            aria-label="Scroll to explore work"
+          >
+            {/* Rotating circular SVG text */}
+            <svg
+              className="absolute inset-0 w-full h-full animate-[spin_14s_linear_infinite] group-hover:animate-[spin_6s_linear_infinite]"
+              viewBox="0 0 100 100"
+            >
+              <defs>
+                <path
+                  id="heroScrollBadgePath"
+                  d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                />
+              </defs>
+              <text className="text-[7.8px] font-mono font-bold tracking-[0.24em] fill-zinc-400 group-hover:fill-zinc-200 uppercase transition-colors">
+                <textPath href="#heroScrollBadgePath" startOffset="0%">
+                  • SCROLL TO EXPLORE • CLOUD & FIRE •
+                </textPath>
+              </text>
+            </svg>
 
-          <div className="p-3.5 rounded-xl border border-zinc-900 bg-noir-950/80 backdrop-blur-sm">
-            <div className="text-[11px] font-mono tracking-wider text-brand-blue uppercase flex items-center gap-1.5 mb-1 font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Voice AI</span>
+            {/* Center glowing circular button with arrow */}
+            <div className="relative w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/90 border border-rednoir/40 group-hover:border-rednoir flex items-center justify-center shadow-[0_0_20px_rgba(239,35,60,0.25)] group-hover:shadow-[0_0_30px_rgba(239,35,60,0.6)] transition-all">
+              <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 text-rednoir group-hover:text-white transition-colors animate-bounce" />
             </div>
-            <div className="text-sm font-semibold text-white">Speech-to-Text</div>
-            <div className="text-xs text-zinc-500 mt-0.5">Sub-400ms hands-free catalog lookup</div>
-          </div>
+          </button>
+        </div>
 
-          <div className="p-3.5 rounded-xl border border-zinc-900 bg-noir-950/80 backdrop-blur-sm">
-            <div className="text-[11px] font-mono tracking-wider text-emerald-400 uppercase flex items-center gap-1.5 mb-1 font-semibold">
-              <MapPin className="w-3.5 h-3.5" />
-              <span>Spatial</span>
-            </div>
-            <div className="text-sm font-semibold text-white">Leaflet & PostGIS</div>
-            <div className="text-xs text-zinc-500 mt-0.5">Sub-second ward polygon indexing</div>
-          </div>
-
-          <div className="p-3.5 rounded-xl border border-zinc-900 bg-noir-950/80 backdrop-blur-sm">
-            <div className="text-[11px] font-mono tracking-wider text-amber-400 uppercase flex items-center gap-1.5 mb-1 font-semibold">
-              <Terminal className="w-3.5 h-3.5" />
-              <span>Telemetry</span>
-            </div>
-            <div className="text-sm font-semibold text-white">Node & MongoDB</div>
-            <div className="text-xs text-zinc-500 mt-0.5">Automated dynamic montage processing</div>
-          </div>
-
+        {/* Clean Subtle 1px Horizontal Divider Separating Hero from Proof of Work */}
+        <div className="w-full max-w-5xl mx-auto pt-8 sm:pt-10">
+          <div className="w-full border-t border-white/10" />
         </div>
 
       </div>

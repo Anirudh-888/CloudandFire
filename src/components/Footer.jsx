@@ -1,8 +1,8 @@
 import React from 'react';
 import { Logo } from './Logo';
-import { Github, Linkedin, Twitter, ArrowUp, MapPin } from 'lucide-react';
+import { Github, Linkedin, Twitter, ArrowUp, MapPin, User, ArrowUpRight } from 'lucide-react';
 
-export const Footer = () => {
+export const Footer = ({ onOpenFounder }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -26,7 +26,7 @@ export const Footer = () => {
           {/* Col 1: Agency Brand & Identity (Clean, Uncontained, Fluidly Aligned) */}
           <div className="md:col-span-5 flex flex-col justify-between">
             <div>
-              {/* Uncontained, Prominent Logo */}
+              {/* Uncontained Prominent Logo */}
               <div className="mb-4">
                 <Logo size="large" />
               </div>
@@ -57,6 +57,14 @@ export const Footer = () => {
               </li>
               <li>
                 <button 
+                  onClick={() => scrollToSection('services')} 
+                  className="hover:text-white transition-colors"
+                >
+                  Services
+                </button>
+              </li>
+              <li>
+                <button 
                   onClick={() => scrollToSection('proof-of-work')} 
                   className="hover:text-white transition-colors"
                 >
@@ -73,18 +81,21 @@ export const Footer = () => {
               </li>
               <li>
                 <button 
-                  onClick={() => scrollToSection('services')} 
-                  className="hover:text-white transition-colors"
-                >
-                  Engineering Services
-                </button>
-              </li>
-              <li>
-                <button 
                   onClick={() => scrollToSection('consultation')} 
                   className="hover:text-white transition-colors"
                 >
                   Book Consultation
+                </button>
+              </li>
+              <li className="pt-1">
+                <button 
+                  onClick={onOpenFounder}
+                  className="hover:text-rednoir transition-colors flex items-center gap-1.5 text-zinc-300 font-semibold"
+                >
+                  <span>Founder Profile</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-rednoir/20 text-rednoir">
+                    /founder
+                  </span>
                 </button>
               </li>
             </ul>
@@ -125,9 +136,16 @@ export const Footer = () => {
         {/* Bottom Bar: Copyright & Clean Social Links */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           
-          {/* Exact Copyright Notice Required */}
-          <div className="text-xs font-mono text-zinc-500 text-center sm:text-left">
-            © 2026 Cloud and Fire. All rights reserved.
+          {/* Exact Required Copyright Notice */}
+          <div className="text-xs font-mono text-zinc-500 text-center sm:text-left flex items-center gap-2">
+            <span>© 2026 Cloud and Fire. All rights reserved.</span>
+            <span>•</span>
+            <button 
+              onClick={onOpenFounder} 
+              className="text-zinc-400 hover:text-rednoir transition-colors underline underline-offset-4"
+            >
+              Founder Page (/founder)
+            </button>
           </div>
 
           {/* Clean Social Links */}

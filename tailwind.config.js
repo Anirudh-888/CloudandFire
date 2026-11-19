@@ -11,10 +11,10 @@ export default {
         obsidian: '#000000',
         noir: {
           950: '#050505',
-          900: '#0a0a0a',
-          850: '#111111',
-          800: '#171717',
-          700: '#262626',
+          900: '#0a0a0c',
+          850: '#101014',
+          800: '#16161c',
+          700: '#24242e',
         },
         rednoir: {
           DEFAULT: '#ef233c',
@@ -25,7 +25,8 @@ export default {
           600: '#dc2626',
           700: '#b91c1c',
           900: '#7f1d1d',
-          glow: 'rgba(239, 35, 60, 0.15)',
+          glow: 'rgba(239, 35, 60, 0.12)',
+          border: 'rgba(239, 35, 60, 0.25)',
           deep: '#d90429'
         },
         brand: {
@@ -35,9 +36,10 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-        display: ['Syne', 'Space Grotesk', 'sans-serif']
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        heading: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       animation: {
         'marquee': 'marquee 28s linear infinite',
@@ -57,10 +59,10 @@ export default {
         }
       },
       boxShadow: {
-        'red-glow': '0 0 25px -5px rgba(239, 35, 60, 0.4)',
+        'red-glow': '0 0 25px -5px rgba(239, 35, 60, 0.35)',
         'red-glow-lg': '0 0 50px -10px rgba(239, 35, 60, 0.45)',
-        'red-bento': '0 0 0 1px rgba(239, 35, 60, 0.2), 0 8px 32px -4px rgba(0, 0, 0, 0.8)',
-        'red-bento-hover': '0 0 0 2px rgba(239, 35, 60, 0.8), 0 12px 40px -4px rgba(239, 35, 60, 0.25)',
+        'enterprise-card': '0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(239, 35, 60, 0.12)',
+        'bento-glow': '0 0 35px -5px rgba(239, 35, 60, 0.28), 0 20px 40px -15px rgba(0, 0, 0, 0.8)',
       }
     },
   },

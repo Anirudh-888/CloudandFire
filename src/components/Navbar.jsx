@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X, User } from 'lucide-react';
 
-export const Navbar = ({ onOpenConsultation }) => {
+export const Navbar = ({ onOpenConsultation, onOpenFounder }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -31,18 +31,25 @@ export const Navbar = ({ onOpenConsultation }) => {
     }
   };
 
+  const handleFounderClick = () => {
+    setMobileMenuOpen(false);
+    if (onOpenFounder) {
+      onOpenFounder();
+    }
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 transition-all duration-300 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 transition-all duration-300 pointer-events-none">
       <div className="max-w-6xl mx-auto flex items-center justify-between pointer-events-auto">
         
         {/* Floating Glassmorphism Pill Nav */}
         <div className={`w-full flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300 ${
           scrolled 
-            ? 'glass-pill shadow-[0_12px_36px_rgba(0,0,0,0.9)] border-rednoir/40 bg-black/85' 
+            ? 'glass-pill shadow-[0_12px_36px_rgba(0,0,0,0.92)] border-rednoir/35 bg-black/85' 
             : 'glass-pill bg-black/65'
         }`}>
           
-          {/* Logo on Left: Uncontained, Clean, Prominent */}
+          {/* Uncontained Prominent Logo */}
           <a 
             href="#hero" 
             onClick={(e) => { e.preventDefault(); scrollToSection('hero'); }}
@@ -52,8 +59,14 @@ export const Navbar = ({ onOpenConsultation }) => {
             <Logo size="default" />
           </a>
 
-          {/* Clean Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-7 lg:gap-9 text-sm font-medium">
+          {/* Clean Desktop Navigation Links: Services, Case Studies, Capabilities, Founder */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium">
+            <button 
+              onClick={() => scrollToSection('services')}
+              className="text-zinc-400 hover:text-white transition-colors duration-150 py-1"
+            >
+              Services
+            </button>
             <button 
               onClick={() => scrollToSection('proof-of-work')}
               className="text-zinc-400 hover:text-white transition-colors duration-150 py-1"
@@ -67,16 +80,13 @@ export const Navbar = ({ onOpenConsultation }) => {
               Capabilities
             </button>
             <button 
-              onClick={() => scrollToSection('services')}
-              className="text-zinc-400 hover:text-white transition-colors duration-150 py-1"
+              onClick={handleFounderClick}
+              className="text-zinc-400 hover:text-white transition-colors duration-150 py-1 flex items-center gap-1.5 group"
             >
-              Services
-            </button>
-            <button 
-              onClick={() => scrollToSection('architecture')}
-              className="text-zinc-400 hover:text-white transition-colors duration-150 py-1"
-            >
-              Architecture
+              <span>Founder</span>
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-rednoir/20 text-rednoir border border-rednoir/30 group-hover:bg-rednoir group-hover:text-white transition-colors">
+                Profile
+              </span>
             </button>
           </nav>
 
@@ -86,10 +96,8 @@ export const Navbar = ({ onOpenConsultation }) => {
               onClick={handleBookConsultation}
               className="relative group overflow-hidden rounded-full p-[1px] focus:outline-none transition-all duration-300 active:scale-95"
             >
-              {/* Animated Glowing Border Gradient */}
-              <span className="absolute inset-0 bg-gradient-to-r from-rednoir via-red-500 to-[#ff5e13] rounded-full opacity-80 group-hover:opacity-100 transition-opacity blur-[2px]" />
+              <span className="absolute inset-0 bg-gradient-to-r from-rednoir via-red-500 to-red-600 rounded-full opacity-80 group-hover:opacity-100 transition-opacity blur-[2px]" />
               
-              {/* Inner Pill Button */}
               <span className="relative flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-black text-xs sm:text-sm font-semibold text-white transition-colors group-hover:bg-zinc-950 shadow-[0_0_20px_rgba(239,35,60,0.35)] group-hover:shadow-[0_0_28px_rgba(239,35,60,0.6)]">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rednoir opacity-75"></span>
@@ -100,7 +108,7 @@ export const Navbar = ({ onOpenConsultation }) => {
               </span>
             </button>
 
-            {/* Mobile Menu Hamburger Toggle */}
+            {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 rounded-full border border-zinc-800 bg-zinc-900/80 text-zinc-300 hover:text-white focus:outline-none transition-colors"
@@ -116,8 +124,15 @@ export const Navbar = ({ onOpenConsultation }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-3 max-w-6xl mx-auto rounded-2xl glass-pill bg-black/95 p-6 border border-rednoir/30 shadow-[0_20px_40px_rgba(0,0,0,0.9)] pointer-events-auto">
-          <div className="flex flex-col gap-4 text-base font-medium">
+        <div className="md:hidden mt-3 max-w-6xl mx-auto rounded-2xl glass-pill bg-black/95 p-6 border border-rednoir/30 shadow-[0_20px_40px_rgba(0,0,0,0.95)] pointer-events-auto animate-fade-in">
+          <div className="flex flex-col gap-3.5 text-base font-medium">
+            <button 
+              onClick={() => scrollToSection('services')}
+              className="text-left py-2 px-3 rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-900/60 transition-colors flex items-center justify-between"
+            >
+              <span>Services</span>
+              <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+            </button>
             <button 
               onClick={() => scrollToSection('proof-of-work')}
               className="text-left py-2 px-3 rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-900/60 transition-colors flex items-center justify-between"
@@ -133,10 +148,13 @@ export const Navbar = ({ onOpenConsultation }) => {
               <ArrowUpRight className="w-4 h-4 text-zinc-500" />
             </button>
             <button 
-              onClick={() => scrollToSection('services')}
+              onClick={handleFounderClick}
               className="text-left py-2 px-3 rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-900/60 transition-colors flex items-center justify-between"
             >
-              <span>Engineering Services</span>
+              <div className="flex items-center gap-2">
+                <span>Founder Profile</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-rednoir/20 text-rednoir">Direct</span>
+              </div>
               <ArrowUpRight className="w-4 h-4 text-zinc-500" />
             </button>
             <button 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { BentoCaseStudies } from './components/BentoCaseStudies';
@@ -7,18 +7,51 @@ import { ConsultationSection } from './components/ConsultationSection';
 import { KineticMarquee } from './components/KineticMarquee';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
+import { FounderModal } from './components/FounderModal';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isFounderOpen, setIsFounderOpen] = useState(false);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      const isFounderRoute = window.location.hash === '#founder' || 
+                             window.location.pathname === '/founder' || 
+                             window.location.pathname.startsWith('/founder');
+      setIsFounderOpen(isFounderRoute);
+    };
+
+    handleRouteChange();
+    window.addEventListener('popstate', handleRouteChange);
+    window.addEventListener('hashchange', handleRouteChange);
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener('hashchange', handleRouteChange);
+    };
+  }, []);
+
+  const handleOpenFounder = () => {
+    if (window.location.pathname !== '/founder') {
+      window.history.pushState(null, '', '/founder');
+    }
+    setIsFounderOpen(true);
+  };
+
+  const handleCloseFounder = () => {
+    if (window.location.pathname.includes('/founder')) {
+      window.history.pushState(null, '', '/');
+    }
+    setIsFounderOpen(false);
+  };
 
   const handleBookConsultation = () => {
     const consultationEl = document.getElementById('consultation');
     if (consultationEl) {
       consultationEl.scrollIntoView({ behavior: 'smooth' });
       // Add subtle interactive highlight effect
-      consultationEl.classList.add('ring-2', 'ring-rednoir/50');
+      consultationEl.classList.add('ring-2', 'ring-rednoir/60');
       setTimeout(() => {
-        consultationEl.classList.remove('ring-2', 'ring-rednoir/50');
+        consultationEl.classList.remove('ring-2', 'ring-rednoir/60');
       }, 1500);
     }
   };
@@ -34,7 +67,10 @@ export function App() {
     <div className="min-h-screen bg-black text-white relative flex flex-col font-sans selection:bg-rednoir selection:text-white">
       
       {/* Sticky Header with Floating Glassmorphism Pill Nav */}
-      <Navbar onOpenConsultation={handleBookConsultation} />
+      <Navbar 
+        onOpenConsultation={handleBookConsultation} 
+        onOpenFounder={handleOpenFounder}
+      />
 
       {/* Main Single Page Layout */}
       <main className="flex-1">
@@ -58,13 +94,15 @@ export function App() {
           onBookConsultation={handleBookConsultation} 
         />
 
-        {/* Section: Direct Technical Consultation Intake */}
+        {/* Section 4: High-End Enterprise Consultation Intake Card */}
         <ConsultationSection />
 
       </main>
 
-      {/* Section 4: Minimalist Red Noir Footer */}
-      <Footer />
+      {/* Section 5: Minimalist Red Noir Footer */}
+      <Footer 
+        onOpenFounder={handleOpenFounder} 
+      />
 
       {/* Detailed Architectural Blueprint Modal */}
       {selectedProject && (
@@ -74,6 +112,16 @@ export function App() {
           onBookConsultation={handleBookConsultation}
         />
       )}
+
+      {/* Founder Profile Modal */}
+      <FounderModal
+        isOpen={isFounderOpen}
+        onClose={handleCloseFounder}
+        onBookConsultation={() => {
+          handleCloseFounder();
+          handleBookConsultation();
+        }}
+      />
 
     </div>
   );

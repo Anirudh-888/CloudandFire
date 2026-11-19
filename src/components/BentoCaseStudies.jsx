@@ -1,44 +1,31 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, MapPin, Mic, Radio, Layers, Database, Cpu, CheckCircle2, Sliders, Volume2, Activity, Play } from 'lucide-react';
-import { projects } from '../data/projectsData';
+import { ArrowUpRight, MapPin, Mic, Layers, Database, Cpu, CheckCircle2, Volume2, Activity, Play, Terminal, ShieldAlert, Clock, Radio, Sparkles } from 'lucide-react';
+import { projects, heliriWardData, retaiqVoiceData, evntpulseStageData } from '../data/projectsData';
 
 export const BentoCaseStudies = ({ onSelectProject }) => {
-  // Interactive state for Heliri Card
+  // 1. Heliri Bengaluru Ward State Machine
   const [selectedWard, setSelectedWard] = useState('Koramangala');
-  const [grievanceFilter, setGrievanceFilter] = useState('all');
+  const currentWard = heliriWardData[selectedWard] || heliriWardData['Koramangala'];
 
-  // Interactive state for Retaiq Card
-  const [activeVoiceSample, setActiveVoiceSample] = useState(0);
-  const voiceQueries = [
-    {
-      query: "Check stock balance for 500ml Cold Pressed Olive Oil",
-      response: "Inventory: 42 bottles in Aisle 4B. Status: Healthy. Last sale: 14 mins ago.",
-      intent: "INVENTORY_QUERY",
-      confidence: "98.4%",
-      latency: "280ms"
-    },
-    {
-      query: "Draft PO for 30 packs of Organic Filter Coffee",
-      response: "Drafted PO #PO-8821 for Supplier: Coorg Roast Co. Total: ₹7,800. Awaiting manager approval.",
-      intent: "PURCHASE_ORDER_DRAFT",
-      confidence: "99.1%",
-      latency: "340ms"
-    },
-    {
-      query: "Flag variance in Dairy refrigeration unit 2",
-      response: "Variance logged: 6 units shortfall. Sent alert to Floor Supervisor Raghav.",
-      intent: "STOCK_VARIANCE_FLAG",
-      confidence: "97.8%",
-      latency: "310ms"
-    }
-  ];
+  // 2. Retaiq Voice AI State Machine
+  const [activeVoiceIndex, setActiveVoiceIndex] = useState(0);
+  const [isSimulatingVoice, setIsSimulatingVoice] = useState(false);
+  const activeVoice = retaiqVoiceData[activeVoiceIndex] || retaiqVoiceData[0];
 
-  // Interactive state for EvntPulse Card
-  const [telemetryPlaying, setTelemetryPlaying] = useState(true);
-  const [activeFrame, setActiveFrame] = useState(1);
+  const handleVoiceQuerySelect = (idx) => {
+    setIsSimulatingVoice(true);
+    setActiveVoiceIndex(idx);
+    setTimeout(() => {
+      setIsSimulatingVoice(false);
+    }, 280);
+  };
+
+  // 3. EvntPulse Pipeline Stage State Machine
+  const [activeStageIndex, setActiveStageIndex] = useState(0);
+  const currentStage = evntpulseStageData[activeStageIndex] || evntpulseStageData[0];
 
   return (
-    <section id="proof-of-work" className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-obsidian overflow-hidden">
+    <section id="proof-of-work" className="relative pt-10 sm:pt-14 pb-24 sm:pb-32 px-4 sm:px-6 lg:px-8 bg-obsidian overflow-hidden">
       
       {/* Background ambient red glow */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-rednoir/10 rounded-full blur-[140px] pointer-events-none -z-10" />
@@ -46,7 +33,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
 
       <div className="max-w-6xl mx-auto">
         
-        {/* Section Header with Glowing Red Noir Typography */}
+        {/* Section Header with Disciplined Typography */}
         <div className="flex flex-col items-start mb-14 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rednoir/30 bg-rednoir/10 mb-4">
             <span className="w-2 h-2 rounded-full bg-rednoir animate-ping" />
@@ -55,8 +42,8 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight text-white uppercase">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-100 to-zinc-400">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight text-white uppercase">
+            <span className="text-white">
               PROOF OF 
             </span>{' '}
             <span className="text-rednoir drop-shadow-[0_0_30px_rgba(239,35,60,0.5)]">
@@ -64,16 +51,16 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
             </span>
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-zinc-400 max-w-2xl font-normal">
-            We don't showcase design mockups or generic templates. Every platform below was architected, engineered, and deployed to solve critical operational workloads.
+          <p className="mt-4 text-base sm:text-lg text-zinc-400 max-w-2xl font-sans font-normal leading-relaxed">
+            Every platform below was architected, engineered, and deployed to solve real-world operational bottlenecks. Fully interactive client-side state models below illustrate production system behavior.
           </p>
         </div>
 
-        {/* Bento Grid Layout (3 Detailed Bento Cards with glowing 2px red borders) */}
+        {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* =========================================================================
-              CARD 1: HELIRI BENGALURU (Span 7 columns on desktop)
+              CARD 1: HELIRI BENGALURU (7 cols) - Civic Grievance & Spatial Mapping
              ========================================================================= */}
           <div className="lg:col-span-7 bento-card p-6 sm:p-8 flex flex-col justify-between group">
             
@@ -95,7 +82,8 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
 
                 <button 
                   onClick={() => onSelectProject(projects[0])}
-                  className="flex items-center gap-1 text-xs font-mono text-zinc-400 group-hover:text-rednoir transition-colors"
+                  className="flex items-center gap-1 text-xs font-mono text-zinc-400 group-hover:text-rednoir transition-colors focus:outline-none"
+                  aria-label="Inspect Heliri Architecture"
                 >
                   <span className="hidden sm:inline">Inspect Architecture</span>
                   <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-rednoir transition-all" />
@@ -103,41 +91,42 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
               </div>
 
               {/* Title & Tagline */}
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display tracking-tight group-hover:text-rednoir transition-colors">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors">
                 {projects[0].name}
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-rednoir/90 uppercase tracking-widest mt-1">
+              <p className="text-xs sm:text-sm font-mono text-rednoir uppercase tracking-wider mt-1">
                 {projects[0].tagline}
               </p>
 
-              <p className="mt-3 text-sm text-zinc-400 leading-relaxed">
+              <p className="mt-3 text-sm text-zinc-400 font-sans leading-relaxed">
                 {projects[0].description}
               </p>
             </div>
 
-            {/* Interactive Leaflet Spatial Simulator */}
+            {/* Interactive Leaflet Spatial Simulator (Driven by heliriWardData) */}
             <div className="my-6 rounded-xl border border-zinc-800 bg-black/90 p-4 shadow-inner relative overflow-hidden">
               <div className="flex items-center justify-between mb-3 text-xs font-mono text-zinc-400 border-b border-zinc-800/80 pb-2.5">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-3.5 h-3.5 text-rednoir" />
-                  <span className="text-white font-semibold">Live Ward Spatial View</span>
+                  <span className="text-white font-semibold">Ward Spatial Telemetry View</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[10px] text-zinc-500">198 Wards Synced</span>
+                  <span className="text-[10px] text-zinc-400 font-mono tabular-nums">198 Wards Mapped</span>
                 </div>
               </div>
 
               {/* Ward Selector Tabs */}
-              <div className="flex flex-wrap gap-1.5 mb-3">
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mr-1">Select Ward:</span>
                 {['Koramangala', 'HSR Layout', 'Indiranagar', 'Bellandur'].map(ward => (
                   <button
                     key={ward}
                     onClick={() => setSelectedWard(ward)}
-                    className={`px-2.5 py-1 rounded text-[11px] font-mono transition-colors ${
+                    className={`px-3 py-1 rounded text-xs font-mono transition-all focus:outline-none ${
                       selectedWard === ward 
-                        ? 'bg-rednoir text-white font-semibold' 
-                        : 'bg-zinc-900 text-zinc-400 hover:text-zinc-200'
+                        ? 'bg-rednoir text-white font-semibold shadow-[0_0_12px_rgba(239,35,60,0.4)]' 
+                        : 'bg-zinc-900 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-850'
                     }`}
                   >
                     {ward}
@@ -145,61 +134,106 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                 ))}
               </div>
 
-              {/* Mock Geospatial Map Viewport */}
-              <div className="relative h-44 rounded-lg bg-zinc-950 border border-zinc-800/70 p-3 flex flex-col justify-between overflow-hidden">
-                {/* Visual grid representing spatial coordinates */}
-                <div className="absolute inset-0 red-noir-grid-dense opacity-40" />
+              {/* Geospatial Map Viewport & State Machine Readout */}
+              <div className="relative rounded-lg bg-zinc-950 border border-zinc-800/70 p-3.5 flex flex-col justify-between overflow-hidden">
+                <div className="absolute inset-0 red-noir-grid-dense opacity-35" />
 
-                {/* Simulated Ward Boundaries & Coordinate Overlay */}
-                <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-zinc-500">
-                  <span>EPSG:4326 | Lat 12.9352° N, Long 77.6245° E</span>
-                  <span className="text-rednoir font-semibold">BBMP Ward Polygon #{selectedWard === 'Koramangala' ? '151' : selectedWard === 'HSR Layout' ? '174' : selectedWard === 'Indiranagar' ? '89' : '150'}</span>
-                </div>
-
-                {/* Simulated Active Hotspots */}
-                <div className="relative z-10 grid grid-cols-3 gap-2 my-auto">
-                  <div className="p-2 rounded bg-black/85 border border-rednoir/40 backdrop-blur-sm">
-                    <div className="text-[10px] font-mono text-rednoir font-bold">Pothole / Road Distress</div>
-                    <div className="text-xs font-semibold text-white mt-0.5">80ft Rd Junction</div>
-                    <div className="text-[10px] text-amber-400 flex items-center gap-1 mt-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                      <span>Assigned to Ward Engineer</span>
-                    </div>
+                {/* Spatial Coordinate Header */}
+                <div className="relative z-10 flex flex-wrap items-center justify-between text-[11px] font-mono text-zinc-400 border-b border-zinc-900 pb-2 mb-3 gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-zinc-500">{currentWard.epsg}</span>
+                    <span className="text-zinc-600">•</span>
+                    <span className="text-zinc-300 font-medium tabular-nums">{currentWard.coordinates}</span>
                   </div>
-
-                  <div className="p-2 rounded bg-black/85 border border-emerald-500/40 backdrop-blur-sm">
-                    <div className="text-[10px] font-mono text-emerald-400 font-bold">Streetlight Failure</div>
-                    <div className="text-xs font-semibold text-white mt-0.5">5th Cross Extension</div>
-                    <div className="text-[10px] text-emerald-400 flex items-center gap-1 mt-1">
-                      <CheckCircle2 className="w-2.5 h-2.5" />
-                      <span>Resolved in 4 hrs</span>
-                    </div>
-                  </div>
-
-                  <div className="p-2 rounded bg-black/85 border border-red-500/40 backdrop-blur-sm">
-                    <div className="text-[10px] font-mono text-red-400 font-bold">Drainage Overflow</div>
-                    <div className="text-xs font-semibold text-white mt-0.5">Main Canal Gate</div>
-                    <div className="text-[10px] text-rednoir flex items-center gap-1 mt-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-rednoir animate-ping" />
-                      <span>Priority Escalation</span>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded bg-zinc-900 text-rednoir font-bold text-[10px] border border-rednoir/30">
+                      BBMP Ward #{currentWard.wardNumber}
+                    </span>
+                    <span className="text-zinc-500 text-[10px]">{currentWard.zone}</span>
                   </div>
                 </div>
 
-                {/* Bottom telemetry line */}
-                <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-zinc-400">
-                  <span>FastAPI GeoJSON Query: 84ms</span>
-                  <span className="text-zinc-500">PostGIS ST_DWithin Indexing Active</span>
+                {/* Dynamic Civic Grievance Triage Cards */}
+                <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-2.5 my-1">
+                  
+                  {/* Primary Issue Card */}
+                  <div className="p-2.5 rounded bg-black/90 border border-rednoir/50 backdrop-blur-sm">
+                    <div className="flex items-center justify-between text-[10px] font-mono mb-1">
+                      <span className="text-rednoir font-bold uppercase">{currentWard.primaryIssue.priority} PRIORITY</span>
+                      <span className="text-zinc-500 tabular-nums">{currentWard.primaryIssue.reportedAt}</span>
+                    </div>
+                    <div className="text-xs font-semibold text-white truncate" title={currentWard.primaryIssue.category}>
+                      {currentWard.primaryIssue.category}
+                    </div>
+                    <div className="text-[10px] font-mono text-zinc-400 truncate mt-0.5" title={currentWard.primaryIssue.location}>
+                      {currentWard.primaryIssue.location}
+                    </div>
+                    <div className="text-[10px] font-mono text-amber-400 flex items-center gap-1.5 mt-2 pt-1.5 border-t border-zinc-800">
+                      <Clock className="w-3 h-3 shrink-0" />
+                      <span className="truncate">{currentWard.primaryIssue.status}</span>
+                    </div>
+                  </div>
+
+                  {/* Secondary Hotspot Card */}
+                  <div className="p-2.5 rounded bg-black/90 border border-emerald-500/40 backdrop-blur-sm">
+                    <div className="flex items-center justify-between text-[10px] font-mono mb-1">
+                      <span className="text-emerald-400 font-bold uppercase">HOTSPOT MONITORED</span>
+                      <span className="text-emerald-400">RESOLVED</span>
+                    </div>
+                    <div className="text-xs font-semibold text-white truncate" title={currentWard.secondaryHotspot.category}>
+                      {currentWard.secondaryHotspot.category}
+                    </div>
+                    <div className="text-[10px] font-mono text-zinc-400 truncate mt-0.5" title={currentWard.secondaryHotspot.location}>
+                      {currentWard.secondaryHotspot.location}
+                    </div>
+                    <div className="text-[10px] font-mono text-emerald-400 flex items-center gap-1.5 mt-2 pt-1.5 border-t border-zinc-800">
+                      <CheckCircle2 className="w-3 h-3 shrink-0" />
+                      <span className="truncate">{currentWard.secondaryHotspot.status}</span>
+                    </div>
+                  </div>
+
+                  {/* Critical Escalation Card */}
+                  <div className="p-2.5 rounded bg-black/90 border border-red-500/40 backdrop-blur-sm">
+                    <div className="flex items-center justify-between text-[10px] font-mono mb-1">
+                      <span className="text-rednoir font-bold uppercase">SLA ESCALATION</span>
+                      <span className="w-2 h-2 rounded-full bg-rednoir animate-pulse" />
+                    </div>
+                    <div className="text-xs font-semibold text-white truncate" title={currentWard.criticalEscalation.category}>
+                      {currentWard.criticalEscalation.category}
+                    </div>
+                    <div className="text-[10px] font-mono text-zinc-400 truncate mt-0.5" title={currentWard.criticalEscalation.location}>
+                      {currentWard.criticalEscalation.location}
+                    </div>
+                    <div className="text-[10px] font-mono text-rednoir flex items-center gap-1.5 mt-2 pt-1.5 border-t border-zinc-800">
+                      <ShieldAlert className="w-3 h-3 shrink-0" />
+                      <span className="truncate">{currentWard.criticalEscalation.status}</span>
+                    </div>
+                  </div>
+
                 </div>
+
+                {/* Spatial Engine Telemetry Footer */}
+                <div className="relative z-10 flex flex-wrap items-center justify-between text-[10px] font-mono text-zinc-400 pt-2.5 mt-2 border-t border-zinc-900 gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-rednoir font-semibold">PostGIS ST_Contains:</span>
+                    <span className="text-white font-mono tabular-nums">{currentWard.queryLatency}</span>
+                    <span className="text-zinc-600">|</span>
+                    <span className="text-zinc-400 tabular-nums">{currentWard.polygonVertices} GeoJSON vertices</span>
+                  </div>
+                  <div className="text-zinc-500">
+                    Active Assigned Team: <span className="text-zinc-300">{currentWard.primaryIssue.team}</span>
+                  </div>
+                </div>
+
               </div>
             </div>
 
-            {/* Bottom Highlights & Metrics */}
+            {/* Bottom Highlights & Metrics (Tabular Numbers) */}
             <div className="pt-4 border-t border-zinc-900 grid grid-cols-3 gap-2 text-center">
-              {projects[0].metrics.map(metric => (
-                <div key={metric.label} className="p-2 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                  <div className="text-xs sm:text-sm font-bold text-white font-mono">{metric.value}</div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider">{metric.label}</div>
+              {currentWard.metrics.map(metric => (
+                <div key={metric.label} className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
+                  <div className="text-sm font-bold text-white font-mono tabular-nums">{metric.value}</div>
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">{metric.label}</div>
                 </div>
               ))}
             </div>
@@ -207,7 +241,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
           </div>
 
           {/* =========================================================================
-              CARD 2: RETAIQ (Span 5 columns on desktop)
+              CARD 2: RETAIQ (5 cols) - Voice-First AI Store Assistant
              ========================================================================= */}
           <div className="lg:col-span-5 bento-card p-6 sm:p-8 flex flex-col justify-between group">
             
@@ -228,88 +262,129 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
 
                 <button 
                   onClick={() => onSelectProject(projects[1])}
-                  className="flex items-center gap-1 text-xs font-mono text-zinc-400 group-hover:text-rednoir transition-colors"
+                  className="flex items-center gap-1 text-xs font-mono text-zinc-400 group-hover:text-rednoir transition-colors focus:outline-none"
+                  aria-label="Inspect Retaiq Architecture"
                 >
                   <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-rednoir transition-all" />
                 </button>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display tracking-tight group-hover:text-rednoir transition-colors">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors">
                 {projects[1].name}
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-rednoir/90 uppercase tracking-widest mt-1">
+              <p className="text-xs sm:text-sm font-mono text-rednoir uppercase tracking-wider mt-1">
                 {projects[1].tagline}
               </p>
 
-              <p className="mt-3 text-sm text-zinc-400 leading-relaxed">
+              <p className="mt-3 text-sm text-zinc-400 font-sans leading-relaxed">
                 {projects[1].description}
               </p>
             </div>
 
-            {/* Interactive Voice Command Demo */}
-            <div className="my-6 rounded-xl border border-zinc-800 bg-black/90 p-4">
+            {/* Interactive Voice Command State Machine */}
+            <div className="my-6 rounded-xl border border-zinc-800 bg-black/90 p-4 shadow-inner">
               <div className="flex items-center justify-between mb-3 text-xs font-mono text-zinc-400 border-b border-zinc-800/80 pb-2">
                 <div className="flex items-center gap-2">
-                  <Mic className="w-3.5 h-3.5 text-brand-blue animate-pulse" />
-                  <span className="text-white font-semibold">Interactive Voice Simulator</span>
+                  <Mic className={`w-3.5 h-3.5 text-brand-blue ${isSimulatingVoice ? 'animate-bounce' : 'animate-pulse'}`} />
+                  <span className="text-white font-semibold">Store Manager Voice Dispatch</span>
                 </div>
-                <span className="text-[10px] text-zinc-500 font-mono">Select Query:</span>
+                <span className="text-[10px] text-zinc-500 font-mono">Select Prompt:</span>
               </div>
 
-              {/* Sample Voice Prompts */}
-              <div className="flex flex-col gap-1.5 mb-3">
-                {voiceQueries.map((item, idx) => (
+              {/* Sample Voice Prompts Selector */}
+              <div className="grid grid-cols-2 gap-1.5 mb-3">
+                {retaiqVoiceData.map((item, idx) => (
                   <button
-                    key={idx}
-                    onClick={() => setActiveVoiceSample(idx)}
-                    className={`text-left p-2 rounded-lg text-xs font-mono transition-all flex items-center justify-between ${
-                      activeVoiceSample === idx 
-                        ? 'bg-zinc-900 border border-rednoir/40 text-white' 
-                        : 'bg-zinc-950/60 text-zinc-400 hover:text-zinc-200 border border-transparent'
+                    key={item.id}
+                    onClick={() => handleVoiceQuerySelect(idx)}
+                    className={`text-left p-2 rounded-lg text-xs font-mono transition-all border focus:outline-none ${
+                      activeVoiceIndex === idx 
+                        ? 'bg-zinc-900 border-rednoir/60 text-white shadow-[0_0_12px_rgba(239,35,60,0.25)]' 
+                        : 'bg-zinc-950/60 text-zinc-400 hover:text-zinc-200 border-zinc-850'
                     }`}
                   >
-                    <span className="truncate mr-2">"{item.query}"</span>
-                    <span className="shrink-0 text-[10px] text-rednoir font-bold">RUN</span>
+                    <div className="flex items-center justify-between mb-0.5">
+                      <span className="text-[10px] font-bold text-zinc-400 truncate">{item.label}</span>
+                      <span className="text-[9px] text-rednoir font-bold font-mono">RUN</span>
+                    </div>
+                    <div className="text-[11px] text-zinc-300 truncate">
+                      "{item.audioQuery}"
+                    </div>
                   </button>
                 ))}
               </div>
 
-              {/* Simulated Audio Wave & AI Extraction Result */}
+              {/* Simulated Audio Spectrum Waveform & Parsing Feedback */}
               <div className="rounded-lg bg-zinc-950 border border-zinc-800/80 p-3">
                 <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 mb-2">
                   <span className="text-brand-blue font-bold flex items-center gap-1.5">
                     <Volume2 className="w-3 h-3" />
                     <span>AUDIO RECOGNITION</span>
                   </span>
-                  <span className="text-emerald-400 font-mono">Latency: {voiceQueries[activeVoiceSample].latency}</span>
+                  <div className="flex items-center gap-2 font-mono">
+                    <span className="text-zinc-500">Latency:</span>
+                    <span className="text-emerald-400 font-bold tabular-nums">{activeVoice.latency}</span>
+                  </div>
                 </div>
 
                 {/* Simulated Audio Spectrum Waveform */}
                 <div className="flex items-end gap-1 h-7 mb-3 px-1">
-                  {[40, 70, 30, 85, 100, 60, 45, 90, 80, 50, 95, 30, 60, 85, 40, 70, 90, 35, 60].map((h, i) => (
+                  {activeVoice.waveformPattern.map((h, i) => (
                     <div 
                       key={i} 
-                      className="flex-1 bg-gradient-to-t from-brand-blue to-rednoir rounded-full transition-all duration-300"
-                      style={{ height: `${(h * (activeVoiceSample + 1) * 23) % 100}%` }}
+                      className={`flex-1 rounded-full transition-all duration-300 ${
+                        isSimulatingVoice 
+                          ? 'bg-rednoir animate-pulse' 
+                          : 'bg-gradient-to-t from-brand-blue via-rednoir/80 to-rednoir'
+                      }`}
+                      style={{ 
+                        height: isSimulatingVoice ? `${Math.min(100, h * 1.25)}%` : `${h}%` 
+                      }}
                     />
                   ))}
                 </div>
 
-                {/* Extracted Structured Response */}
-                <div className="p-2.5 rounded bg-black/80 border border-zinc-800 text-[11px] font-mono">
-                  <div className="text-zinc-500 text-[10px] mb-1">INTENT: {voiceQueries[activeVoiceSample].intent} (Confidence: {voiceQueries[activeVoiceSample].confidence})</div>
-                  <div className="text-white font-medium">{voiceQueries[activeVoiceSample].response}</div>
-                </div>
-              </div>
+                {/* Structured Deterministic Intent & Action Extraction */}
+                <div className="p-3 rounded bg-black/85 border border-zinc-800 font-mono text-xs space-y-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-900 pb-2 text-[10px]">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-zinc-500">INTENT:</span>
+                      <span className="text-rednoir font-bold">{activeVoice.parsedIntent}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-zinc-500">CONFIDENCE:</span>
+                      <span className="text-emerald-400 font-bold tabular-nums">{activeVoice.confidence}</span>
+                    </div>
+                  </div>
 
+                  <div className="text-zinc-300 text-[11px] leading-relaxed">
+                    <span className="text-zinc-500 block text-[10px] mb-0.5">RETAIL INVENTORY LEDGER:</span>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white font-semibold">{activeVoice.item}</span>
+                      <span className="text-white font-mono font-bold tabular-nums bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800">
+                        {activeVoice.stockLevel}
+                      </span>
+                    </div>
+                    <div className="text-zinc-400 text-[10px] mt-1">
+                      {activeVoice.location} • <span className="text-zinc-500">{activeVoice.sku}</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-zinc-900 text-[11px] text-zinc-300">
+                    <span className="text-rednoir font-bold">ACTION: </span>
+                    <span>{activeVoice.actionOutput}</span>
+                  </div>
+                </div>
+
+              </div>
             </div>
 
             {/* Bottom Metrics */}
             <div className="pt-4 border-t border-zinc-900 grid grid-cols-3 gap-2 text-center">
               {projects[1].metrics.map(metric => (
-                <div key={metric.label} className="p-2 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                  <div className="text-xs sm:text-sm font-bold text-white font-mono">{metric.value}</div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider">{metric.label}</div>
+                <div key={metric.label} className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
+                  <div className="text-sm font-bold text-white font-mono tabular-nums">{metric.value}</div>
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">{metric.label}</div>
                 </div>
               ))}
             </div>
@@ -317,7 +392,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
           </div>
 
           {/* =========================================================================
-              CARD 3: EVNTPULSE (Span Full 12 columns on desktop)
+              CARD 3: EVNTPULSE (Full 12 cols) - Analytics & Event Montage Engine
              ========================================================================= */}
           <div className="lg:col-span-12 bento-card p-6 sm:p-8 flex flex-col lg:flex-row gap-8 justify-between group">
             
@@ -339,21 +414,22 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
 
                   <button 
                     onClick={() => onSelectProject(projects[2])}
-                    className="flex items-center gap-1 text-xs font-mono text-zinc-400 group-hover:text-rednoir transition-colors"
+                    className="flex items-center gap-1 text-xs font-mono text-zinc-400 group-hover:text-rednoir transition-colors focus:outline-none"
+                    aria-label="Inspect EvntPulse Architecture"
                   >
                     <span className="hidden sm:inline">Inspect Architecture</span>
                     <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-rednoir transition-all" />
                   </button>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display tracking-tight group-hover:text-rednoir transition-colors">
+                <h3 className="text-2xl sm:text-3xl font-bold text-white font-display tracking-tight group-hover:text-rednoir transition-colors">
                   {projects[2].name}
                 </h3>
-                <p className="text-xs sm:text-sm font-mono text-rednoir/90 uppercase tracking-widest mt-1">
+                <p className="text-xs sm:text-sm font-mono text-rednoir uppercase tracking-wider mt-1">
                   {projects[2].tagline}
                 </p>
 
-                <p className="mt-3 text-sm text-zinc-400 leading-relaxed">
+                <p className="mt-3 text-sm text-zinc-400 font-sans leading-relaxed">
                   {projects[2].description}
                 </p>
 
@@ -367,78 +443,96 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
                 </ul>
               </div>
 
-              {/* Bottom Metrics */}
+              {/* Bottom Metrics with Tabular Numbers */}
               <div className="pt-6 mt-6 border-t border-zinc-900 grid grid-cols-3 gap-3 text-center">
-                {projects[2].metrics.map(metric => (
-                  <div key={metric.label} className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
-                    <div className="text-sm font-bold text-white font-mono">{metric.value}</div>
-                    <div className="text-[10px] text-zinc-500 uppercase tracking-wider">{metric.label}</div>
-                  </div>
-                ))}
+                <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
+                  <div className="text-sm font-bold text-white font-mono tabular-nums">{currentStage.throughput}</div>
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">Telemetry Rate</div>
+                </div>
+                <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
+                  <div className="text-sm font-bold text-white font-mono tabular-nums">{currentStage.dataBitrate}</div>
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">Stream Bitrate</div>
+                </div>
+                <div className="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-900">
+                  <div className="text-sm font-bold text-white font-mono tabular-nums">{currentStage.fps}</div>
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono mt-0.5">Framerate Lock</div>
+                </div>
               </div>
             </div>
 
-            {/* Right: Live Montage Engine Simulation */}
-            <div className="lg:w-1/2 flex flex-col justify-between rounded-xl border border-zinc-800 bg-black/90 p-4 sm:p-5">
+            {/* Right: EvntPulse Pipeline State Machine & Live Synchronized Terminal */}
+            <div className="lg:w-1/2 flex flex-col justify-between rounded-xl border border-zinc-800 bg-black/90 p-4 sm:p-5 shadow-inner">
               
               <div className="flex items-center justify-between pb-3 border-b border-zinc-800 text-xs font-mono text-zinc-400">
                 <div className="flex items-center gap-2">
                   <Activity className="w-4 h-4 text-amber-400 animate-pulse" />
                   <span className="text-white font-semibold">Automated Media Assembly Pipeline</span>
                 </div>
-                <span className="text-[10px] text-emerald-400 font-mono">Worker Queue: Healthy (0 Lag)</span>
+                <span className="text-[10px] text-emerald-400 font-mono tabular-nums">{currentStage.queueDepth}</span>
               </div>
 
-              {/* Visual FFmpeg Reel Timeline Preview */}
+              {/* 4 Pipeline Stages Selector (Requirement: Stage Capture, Grand Pulse, Speaker Clean-up, Closing Montage) */}
               <div className="my-4">
-                <div className="text-[11px] font-mono text-zinc-400 mb-2 flex items-center justify-between">
-                  <span>Dynamic Montage Timeline</span>
-                  <span className="text-rednoir">4K Stream Splicing</span>
+                <div className="text-[11px] font-mono text-zinc-400 mb-2.5 flex items-center justify-between">
+                  <span>SELECT PIPELINE STAGE:</span>
+                  <span className="text-rednoir font-bold tabular-nums">{currentStage.gpuLoad}</span>
                 </div>
 
-                <div className="grid grid-cols-4 gap-2">
-                  {[
-                    { id: 1, title: "Stage Keynote", time: "00:04", status: "Processed" },
-                    { id: 2, title: "Crowd Pulse", time: "00:12", status: "Rendering" },
-                    { id: 3, title: "Speaker Close-up", time: "00:18", status: "Queued" },
-                    { id: 4, title: "Closing Montage", time: "00:24", status: "Queued" }
-                  ].map((frame) => (
-                    <div 
-                      key={frame.id}
-                      onClick={() => setActiveFrame(frame.id)}
-                      className={`cursor-pointer p-2.5 rounded-lg border text-center transition-all ${
-                        activeFrame === frame.id 
-                          ? 'border-rednoir bg-rednoir/10 shadow-[0_0_15px_rgba(239,35,60,0.3)]' 
-                          : 'border-zinc-800 bg-zinc-950 hover:border-zinc-700'
-                      }`}
-                    >
-                      <div className="h-10 rounded bg-zinc-900 border border-zinc-800/80 flex items-center justify-center mb-1.5 relative overflow-hidden">
-                        <Play className="w-3.5 h-3.5 text-zinc-400" />
-                        <span className="absolute bottom-0.5 right-1 text-[9px] font-mono text-zinc-500">{frame.time}</span>
-                      </div>
-                      <div className="text-[10px] font-semibold text-white truncate">{frame.title}</div>
-                      <div className={`text-[9px] font-mono mt-0.5 ${
-                        frame.status === 'Processed' ? 'text-emerald-400' :
-                        frame.status === 'Rendering' ? 'text-amber-400 animate-pulse' : 'text-zinc-500'
-                      }`}>
-                        {frame.status}
-                      </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {evntpulseStageData.map((stage, idx) => {
+                    const isSelected = activeStageIndex === idx;
+
+                    return (
+                      <button 
+                        key={stage.id}
+                        onClick={() => setActiveStageIndex(idx)}
+                        className={`p-2.5 rounded-lg border text-left transition-all focus:outline-none ${
+                          isSelected 
+                            ? 'border-rednoir bg-rednoir/15 shadow-[0_0_15px_rgba(239,35,60,0.3)] ring-1 ring-rednoir/60' 
+                            : 'border-zinc-800 bg-zinc-950 hover:border-zinc-700'
+                        }`}
+                      >
+                        <div className="h-9 rounded bg-zinc-900 border border-zinc-850 flex items-center justify-center mb-1.5 relative overflow-hidden">
+                          <Play className={`w-3.5 h-3.5 ${isSelected ? 'text-rednoir' : 'text-zinc-500'}`} />
+                          <span className="absolute bottom-0.5 right-1 text-[9px] font-mono text-zinc-500 tabular-nums">{stage.timestamp}</span>
+                        </div>
+                        <div className="text-[11px] font-semibold text-white truncate font-display">{stage.name}</div>
+                        <div className={`text-[9px] font-mono mt-0.5 font-bold ${
+                          isSelected ? 'text-rednoir' : 'text-zinc-500'
+                        }`}>
+                          {stage.stageStatus}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Worker Node Readout */}
+              <div className="mb-3 px-3 py-2 rounded-lg bg-zinc-950/80 border border-zinc-850 flex items-center justify-between text-[11px] font-mono">
+                <div className="flex items-center gap-2">
+                  <Cpu className="w-3.5 h-3.5 text-rednoir" />
+                  <span className="text-zinc-300 font-semibold">{currentStage.activeWorker}</span>
+                </div>
+                <span className="text-zinc-500 text-[10px] tabular-nums">{currentStage.workerThreads}</span>
+              </div>
+
+              {/* Live Synchronized Telemetry & Terminal Logs */}
+              <div className="p-3 rounded-lg bg-zinc-950 border border-zinc-800 font-mono text-xs">
+                <div className="text-[10px] text-zinc-500 mb-2 flex items-center justify-between border-b border-zinc-900 pb-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <Terminal className="w-3 h-3 text-rednoir" />
+                    <span>SYNCHRONIZED STAGE STDOUT</span>
+                  </div>
+                  <span className="text-zinc-600 tabular-nums">STAGE ID: {currentStage.id.toUpperCase()}</span>
+                </div>
+                
+                <div className="space-y-1">
+                  {currentStage.logStdout.map((logLine, lIdx) => (
+                    <div key={lIdx} className="text-zinc-300 text-[11px] leading-relaxed">
+                      {logLine}
                     </div>
                   ))}
-                </div>
-              </div>
-
-              {/* Telemetry Stream Output Log */}
-              <div className="p-3 rounded-lg bg-zinc-950 border border-zinc-800/80 font-mono text-[11px] text-zinc-300">
-                <div className="text-[10px] text-zinc-500 mb-1 flex items-center justify-between">
-                  <span>TELEMETRY INGESTION STREAM</span>
-                  <span className="text-zinc-600">STDOUT / JSON</span>
-                </div>
-                <div className="text-zinc-400">
-                  <span className="text-emerald-400">[200 OK]</span> Batch #4892: 1,420 attendee telemetry points aggregated into MongoDB time-series collection.
-                </div>
-                <div className="text-zinc-400 mt-1">
-                  <span className="text-rednoir">[FFmpeg]</span> Compiling 60fps dynamic highlight clip with GPU acceleration.
                 </div>
               </div>
 
