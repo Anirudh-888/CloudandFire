@@ -116,7 +116,7 @@ export const Footer = ({ onOpenFounder }) => {
               </li>
               <li className="p-2 sm:p-2.5 rounded-lg bg-zinc-950 border border-zinc-900 flex items-center justify-between min-w-0">
                 <div className="truncate mr-2">
-                  <div className="text-white font-semibold truncate">RETAIQ</div>
+                  <div className="text-white font-semibold truncate">RETAILIQ</div>
                   <div className="text-zinc-500 text-[10px] truncate">Voice-First AI Store Assistant (FastAPI)</div>
                 </div>
                 <span className="text-brand-blue text-[10px] shrink-0">PILOT</span>

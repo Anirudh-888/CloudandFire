@@ -241,7 +241,7 @@ export const BentoCaseStudies = ({ onSelectProject }) => {
           </div>
 
           {/* =========================================================================
-              CARD 2: RETAIQ (5 cols) - Voice-First AI Store Assistant
+              CARD 2: RETAILIQ (5 cols) - Voice-First AI Store Assistant
              ========================================================================= */}
           <div className="lg:col-span-5 bento-card p-4 sm:p-8 flex flex-col justify-between group min-w-0">
             
