@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Building2, CheckCircle2, Clock, Mail, MapPin, Send, ShieldCheck, Terminal, User, AlertCircle } from 'lucide-react';
+import { Building2, CheckCircle2, Clock, Mail, MapPin, Send, ShieldCheck, Terminal, User, AlertCircle } from 'lucide-react';
 
 export const ConsultationSection = () => {
   const [formState, setFormState] = useState({
@@ -8,10 +8,12 @@ export const ConsultationSection = () => {
     company: '',
     category: 'Enterprise Web & Mobile',
     timeline: '2–4 Weeks Rapid Sprint',
-    brief: ''
+    brief: '',
+    botcheck: ''
   });
 
   const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -34,16 +36,52 @@ export const ConsultationSection = () => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError('');
     if (!validate()) return;
 
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setSubmitError('Form configuration missing. Please email anirudh@cloudandfire.tech directly.');
+      return;
+    }
+
     setLoading(true);
-    // Coherent client-side intake state machine without fake backend fetch
-    setTimeout(() => {
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `New Consultation Intake (${formState.category}) — Cloud & Fire`,
+          from_name: 'Cloud & Fire (cloudandfire.tech)',
+          name: formState.name.trim(),
+          email: formState.email.trim(),
+          company: formState.company.trim() || 'Not specified',
+          category: formState.category,
+          timeline: formState.timeline,
+          message: formState.brief.trim(),
+          botcheck: formState.botcheck
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.message || 'Submission failed. Please email anirudh@cloudandfire.tech directly.');
+      }
+    } catch {
+      setSubmitError('Network error while submitting. Please email anirudh@cloudandfire.tech directly.');
+    } finally {
       setLoading(false);
-      setSubmitted(true);
-    }, 450);
+    }
   };
 
   return (
@@ -94,24 +132,27 @@ export const ConsultationSection = () => {
                   Technical Intake Registered
                 </h3>
                 <p className="text-sm text-zinc-300 max-w-md mx-auto font-sans leading-relaxed">
-                  Thank you, <span className="text-white font-semibold">{formState.name}</span>. Your brief for <span className="text-rednoir font-medium">{formState.category}</span> ({formState.timeline}) has been queued for architectural assessment.
+                  Thank you, <span className="text-white font-semibold">{formState.name}</span>. Your brief for <span className="text-rednoir font-medium">{formState.category}</span> ({formState.timeline}) has been routed to <span className="text-white font-medium">anirudh@cloudandfire.tech</span>.
                 </p>
                 <div className="p-3.5 rounded-xl bg-black/80 border border-zinc-800 max-w-md mx-auto text-left text-xs font-mono space-y-1 text-zinc-400">
                   <div><span className="text-zinc-500">Contact:</span> <span className="text-white">{formState.email}</span></div>
                   {formState.company && <div><span className="text-zinc-500">Entity:</span> <span className="text-white">{formState.company}</span></div>}
-                  <div><span className="text-zinc-500">Status:</span> <span className="text-emerald-400">Direct Route to Bengaluru Engineering Team</span></div>
+                  <div><span className="text-zinc-500">Status:</span> <span className="text-emerald-400">Delivered to anirudh@cloudandfire.tech</span></div>
                 </div>
                 <div className="pt-4">
                   <button
+                    type="button"
                     onClick={() => {
                       setSubmitted(false);
+                      setSubmitError('');
                       setFormState({
                         name: '',
                         email: '',
                         company: '',
                         category: 'Enterprise Web & Mobile',
                         timeline: '2–4 Weeks Rapid Sprint',
-                        brief: ''
+                        brief: '',
+                        botcheck: ''
                       });
                       setErrors({});
                     }}
@@ -124,6 +165,19 @@ export const ConsultationSection = () => {
             ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-6 relative z-10">
                 
+                {/* Hidden Honeypot Anti-Spam Field */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  checked={Boolean(formState.botcheck)}
+                  onChange={(e) => setFormState({ ...formState, botcheck: e.target.checked ? 'true' : '' })}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  style={{ display: 'none' }}
+                  aria-hidden="true"
+                />
+
                 {/* Form Top Title */}
                 <div className="border-b border-zinc-800/80 pb-5">
                   <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-rednoir font-semibold mb-1">
@@ -147,6 +201,7 @@ export const ConsultationSection = () => {
                       <User className="w-4 h-4 text-zinc-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
                         type="text"
+                        name="name"
                         value={formState.name}
                         onChange={(e) => {
                           setFormState({ ...formState, name: e.target.value });
@@ -174,6 +229,7 @@ export const ConsultationSection = () => {
                       <Mail className="w-4 h-4 text-zinc-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
                         type="email"
+                        name="email"
                         value={formState.email}
                         onChange={(e) => {
                           setFormState({ ...formState, email: e.target.value });
@@ -203,6 +259,7 @@ export const ConsultationSection = () => {
                     <Building2 className="w-4 h-4 text-zinc-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <input
                       type="text"
+                      name="company"
                       value={formState.company}
                       onChange={(e) => setFormState({ ...formState, company: e.target.value })}
                       placeholder="e.g. Acme Tech / Enterprise Corp."
@@ -279,6 +336,7 @@ export const ConsultationSection = () => {
                   <div className="relative">
                     <Terminal className="w-4 h-4 text-zinc-500 absolute left-4 top-4 pointer-events-none" />
                     <textarea
+                      name="message"
                       rows={4}
                       value={formState.brief}
                       onChange={(e) => {
@@ -298,6 +356,13 @@ export const ConsultationSection = () => {
                     </p>
                   )}
                 </div>
+
+                {submitError && (
+                  <div role="alert" className="p-3.5 rounded-xl bg-red-950/50 border border-red-500/60 text-xs font-mono text-red-200 flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                    <span>{submitError}</span>
+                  </div>
+                )}
 
                 {/* Bold Red-Noir Action Button */}
                 <button
@@ -344,8 +409,8 @@ export const ConsultationSection = () => {
         {/* Alternative Direct Inquiries Strip */}
         <div className="mt-8 text-center text-xs font-mono text-zinc-500">
           Prefer direct email? Reach our systems leads at{' '}
-          <a href="mailto:contact@cloudandfire.tech" className="text-zinc-300 hover:text-rednoir transition-colors underline underline-offset-4">
-            contact@cloudandfire.tech
+          <a href="mailto:anirudh@cloudandfire.tech" className="text-zinc-300 hover:text-rednoir transition-colors underline underline-offset-4">
+            anirudh@cloudandfire.tech
           </a>
         </div>
 
