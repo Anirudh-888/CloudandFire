@@ -29,7 +29,7 @@ export const projects = [
   },
   {
     id: "retaiq",
-    name: "RETAIQ",
+    name: "RETAILIQ",
     category: "Conversational AI & Retail Operations",
     tagline: "Voice-First AI Store Manager & Inventory Assistant",
     description: "An operational voice-first platform engineered for high-throughput retail store managers to query inventory, reconcile daily stock variances, and trigger purchase orders hands-free using real-time voice input.",
