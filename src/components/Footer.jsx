@@ -153,7 +153,7 @@ export const Footer = ({ onOpenFounder }) => {
             
             {/* GitHub */}
             <a 
-              href="https://github.com" 
+              href="https://github.com/Anirudh-888/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-2 rounded-full border border-zinc-800 bg-zinc-950 text-zinc-400 hover:text-white hover:border-rednoir hover:shadow-[0_0_15px_rgba(239,35,60,0.3)] transition-all"
@@ -164,7 +164,7 @@ export const Footer = ({ onOpenFounder }) => {
 
             {/* LinkedIn */}
             <a 
-              href="https://linkedin.com" 
+              href="https://linkedin.com/company/cloudandfire/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-2 rounded-full border border-zinc-800 bg-zinc-950 text-zinc-400 hover:text-white hover:border-rednoir hover:shadow-[0_0_15px_rgba(239,35,60,0.3)] transition-all"
