@@ -7,41 +7,25 @@ import { ConsultationSection } from './components/ConsultationSection';
 import { KineticMarquee } from './components/KineticMarquee';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
-import { FounderModal } from './components/FounderModal';
+
+const FOUNDER_PORTFOLIO_URL = 'https://anirudh.cloudandfire.tech';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [isFounderOpen, setIsFounderOpen] = useState(false);
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      const isFounderRoute = window.location.hash === '#founder' || 
-                             window.location.pathname === '/founder' || 
-                             window.location.pathname.startsWith('/founder');
-      setIsFounderOpen(isFounderRoute);
-    };
+    const isFounderRoute =
+      window.location.hash === '#founder' ||
+      window.location.pathname === '/founder' ||
+      window.location.pathname.startsWith('/founder');
 
-    handleRouteChange();
-    window.addEventListener('popstate', handleRouteChange);
-    window.addEventListener('hashchange', handleRouteChange);
-    return () => {
-      window.removeEventListener('popstate', handleRouteChange);
-      window.removeEventListener('hashchange', handleRouteChange);
-    };
+    if (isFounderRoute) {
+      window.location.replace(FOUNDER_PORTFOLIO_URL);
+    }
   }, []);
 
   const handleOpenFounder = () => {
-    if (window.location.pathname !== '/founder') {
-      window.history.pushState(null, '', '/founder');
-    }
-    setIsFounderOpen(true);
-  };
-
-  const handleCloseFounder = () => {
-    if (window.location.pathname.includes('/founder')) {
-      window.history.pushState(null, '', '/');
-    }
-    setIsFounderOpen(false);
+    window.open(FOUNDER_PORTFOLIO_URL, '_blank', 'noopener,noreferrer');
   };
 
   const handleBookConsultation = () => {
@@ -112,16 +96,6 @@ export function App() {
           onBookConsultation={handleBookConsultation}
         />
       )}
-
-      {/* Founder Profile Modal */}
-      <FounderModal
-        isOpen={isFounderOpen}
-        onClose={handleCloseFounder}
-        onBookConsultation={() => {
-          handleCloseFounder();
-          handleBookConsultation();
-        }}
-      />
 
     </div>
   );
