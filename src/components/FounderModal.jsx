@@ -1,6 +1,5 @@
 import React from 'react';
-import { X, ArrowUpRight, Github, Linkedin, Twitter, MapPin, Terminal, Award, ShieldCheck, Mail } from 'lucide-react';
-import { Logo } from './Logo';
+import { X, ArrowUpRight, Github, Linkedin, Twitter, MapPin, Terminal, Mail } from 'lucide-react';
 
 export const FounderModal = ({ isOpen, onClose, onBookConsultation }) => {
   if (!isOpen) return null;
@@ -48,7 +47,7 @@ export const FounderModal = ({ isOpen, onClose, onBookConsultation }) => {
             </div>
             
             <h3 className="text-2xl sm:text-3xl font-bold font-display text-white tracking-tight">
-              S. Anirudh
+              S Anirudh
             </h3>
             
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-2 mt-1">
@@ -66,7 +65,7 @@ export const FounderModal = ({ isOpen, onClose, onBookConsultation }) => {
           </div>
           
           <p className="text-sm text-zinc-300 leading-relaxed font-normal">
-            "We founded Cloud & Fire to provide startups and enterprise platforms with relentless execution speed without compromising on architectural rigor. No layers of non-technical management, no brittle AI prompt wrappers. We build production software meant to survive sustained high-throughput enterprise scale."
+            "We founded Cloud &amp; Fire to provide startups and enterprise platforms with relentless execution speed without compromising on architectural rigor. No layers of non-technical management, no brittle AI prompt wrappers. We build production software meant to survive sustained high-throughput enterprise scale."
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-mono">
@@ -82,18 +81,18 @@ export const FounderModal = ({ isOpen, onClose, onBookConsultation }) => {
           </div>
         </div>
 
-        {/* Social Links & Direct Action */}
+        {/* Social Links & Direct Actions */}
         <div className="pt-6 border-t border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <a 
-              href="mailto:contact@cloudandfire.tech" 
+              href="mailto:anirudh@cloudandfire.tech" 
               className="p-2 rounded-full border border-zinc-800 bg-zinc-950 text-zinc-400 hover:text-white hover:border-rednoir transition-colors"
               title="Direct Email"
             >
               <Mail className="w-4 h-4" />
             </a>
             <a 
-              href="https://github.com" 
+              href="https://github.com/Anirudh-888" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="p-2 rounded-full border border-zinc-800 bg-zinc-950 text-zinc-400 hover:text-white hover:border-rednoir transition-colors"
@@ -102,7 +101,7 @@ export const FounderModal = ({ isOpen, onClose, onBookConsultation }) => {
               <Github className="w-4 h-4" />
             </a>
             <a 
-              href="https://linkedin.com" 
+              href="https://linkedin.com/sanipeidatech" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="p-2 rounded-full border border-zinc-800 bg-zinc-950 text-zinc-400 hover:text-white hover:border-rednoir transition-colors"
@@ -121,16 +120,28 @@ export const FounderModal = ({ isOpen, onClose, onBookConsultation }) => {
             </a>
           </div>
 
-          <button
-            onClick={() => {
-              onClose();
-              if (onBookConsultation) onBookConsultation();
-            }}
-            className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-rednoir hover:bg-rednoir-deep text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(239,35,60,0.4)] flex items-center justify-center gap-2"
-          >
-            <span>Book Founder Consultation</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
+          <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full sm:w-auto">
+            <a
+              href="https://anirudh.cloudandfire.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-full border border-zinc-700 bg-zinc-950 hover:border-white text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
+            >
+              <span>Founder Portfolio</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+
+            <button
+              onClick={() => {
+                onClose();
+                if (onBookConsultation) onBookConsultation();
+              }}
+              className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-rednoir hover:bg-rednoir-deep text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(239,35,60,0.4)] flex items-center justify-center gap-2"
+            >
+              <span>Book Founder Consultation</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
 
       </div>
